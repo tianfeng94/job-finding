@@ -1,0 +1,8 @@
+source/
+database/
+jd_archive/
+templates/
+CLAUDE.md
+.DS_Store
+.claude/
+*.pdf

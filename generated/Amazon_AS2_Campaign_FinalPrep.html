@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon AS-II · Campaign Strategies · 五场终版面试手册 — Tian Feng</title>
+<style>
+:root {
+  --amazon: #FF9900;
+  --navy: #131921;
+  --blue: #1a5276;
+  --teal: #0e6655;
+  --purple: #6a1b9a;
+  --red: #c0392b;
+  --green: #1e8449;
+  --orange2: #e65100;
+  --border: #dee2e6;
+  --light: #f8f9fa;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a1a; background: #f0f2f5; line-height: 1.65; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 80px; }
+
+.page-header { background: linear-gradient(135deg, var(--navy) 0%, #1a2a4a 100%); color: #fff; border-radius: 10px; padding: 32px 40px; margin-bottom: 20px; }
+.page-header h1 { font-size: 1.65em; font-weight: 700; }
+.page-header h1 span { color: var(--amazon); }
+.page-header .sub { margin-top: 6px; opacity: 0.75; font-size: 0.9em; }
+.page-header .meta { margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+.meta-item { background: rgba(255,255,255,0.12); padding: 4px 14px; border-radius: 20px; font-size: 0.83em; }
+.meta-item.hot { background: rgba(255,153,0,0.35); color: var(--amazon); font-weight: 700; }
+
+/* Nav bar */
+.nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.nav a { padding: 6px 14px; border-radius: 20px; font-size: 0.82em; font-weight: 600; background: var(--navy); color: #fff; text-decoration: none; }
+.nav a:hover { background: var(--amazon); color: #fff; }
+
+/* Cards */
+.card { background: #fff; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+.ch { padding: 13px 24px; font-weight: 700; font-size: 0.97em; display: flex; align-items: center; gap: 8px; }
+.ch.orange { background: var(--amazon); color: #fff; }
+.ch.navy { background: var(--navy); color: #fff; }
+.ch.blue { background: var(--blue); color: #fff; }
+.ch.teal { background: var(--teal); color: #fff; }
+.ch.purple { background: var(--purple); color: #fff; }
+.ch.green { background: #2e7d32; color: #fff; }
+.ch.red { background: var(--red); color: #fff; }
+.cb { padding: 20px 24px; }
+
+/* Verdicts */
+.verdict { border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; }
+.verdict.good { background: #e8f5e9; border-left: 4px solid var(--green); }
+.verdict.warn { background: #fff8e1; border-left: 4px solid #f9a825; }
+.verdict.bad { background: #fce4ec; border-left: 4px solid var(--red); }
+.verdict.info { background: #e8f4fd; border-left: 4px solid var(--blue); }
+.verdict strong { display: block; margin-bottom: 3px; }
+
+/* Sprint checklist */
+.sprint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sprint-day { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.sprint-day-title { padding: 10px 16px; font-weight: 700; color: #fff; font-size: 0.9em; }
+.sprint-day-title.d1 { background: var(--blue); }
+.sprint-day-title.d2 { background: var(--teal); }
+.sprint-day ul { padding: 14px 18px 14px 32px; }
+.sprint-day li { margin-bottom: 6px; font-size: 0.88em; }
+.sprint-day li strong { color: var(--blue); }
+
+/* Story blocks */
+.story { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 18px; overflow: hidden; }
+.story-head { padding: 11px 18px; font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 0.93em; border-bottom: 1px solid var(--border); }
+.story-head.sa { background: #e8f5e9; color: #2e7d32; }
+.story-head.sb { background: #e8eaf6; color: #3949ab; }
+.story-head.sc { background: #fff8e1; color: #f57f17; }
+.story-head.sd { background: #fce4ec; color: #c62828; }
+.story-head.se { background: #e0f2f1; color: #00695c; }
+.story-head.sf { background: #f3e5f5; color: #7b1fa2; }
+.story-body { padding: 16px 18px; font-size: 0.9em; }
+.story-body p { margin-bottom: 8px; }
+
+.starr-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-top: 12px; margin-bottom: 4px; }
+.starr-s { border-left: 3px solid #78909c; padding-left: 12px; color: #455a64; background: #f5f5f5; border-radius: 0 6px 6px 0; padding: 8px 12px; margin: 4px 0; font-size: 0.9em; }
+.starr-t { border-left: 3px solid var(--blue); padding: 8px 12px; background: #e8f4fd; border-radius: 0 6px 6px 0; margin: 4px 0; font-size: 0.9em; }
+.starr-a { border-left: 3px solid var(--teal); padding: 8px 12px; background: #f0faf9; border-radius: 0 6px 6px 0; margin: 4px 0; font-size: 0.9em; line-height: 1.7; }
+.starr-r { border-left: 3px solid var(--green); padding: 8px 12px; background: #e8f5e9; border-radius: 0 6px 6px 0; margin: 4px 0; font-size: 0.9em; }
+.starr-ref { border-left: 3px solid var(--amazon); padding: 8px 12px; background: #fff8e1; border-radius: 0 6px 6px 0; margin: 4px 0; font-size: 0.9em; font-style: italic; }
+
+.nums { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; margin-top: 8px; }
+.nums ul { padding-left: 16px; }
+.nums li { margin-bottom: 3px; font-size: 0.87em; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.tag { padding: 2px 9px; border-radius: 12px; font-size: 0.75em; font-family: monospace; background: #e8f4fd; color: #1a5276; border: 1px solid #bee3f8; }
+.tag.hit { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; font-weight: 700; }
+.tag.warn { background: #fff8e1; color: #f57f17; border-color: #ffe082; }
+
+/* LP map table */
+.lpt { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+.lpt th { background: var(--navy); color: #fff; padding: 9px 14px; text-align: left; }
+.lpt td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.lpt tr:last-child td { border-bottom: none; }
+.lpt tr:nth-child(even) td { background: var(--light); }
+.lp-name-cell { font-weight: 700; color: var(--blue); white-space: nowrap; }
+.primary-story { color: var(--green); font-weight: 600; }
+.backup-story { color: #888; font-size: 0.85em; }
+
+/* Interview breakdown */
+.int-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+.int-cell { padding: 14px 12px; border-right: 1px solid var(--border); }
+.int-cell:last-child { border-right: none; }
+.int-num { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 4px; }
+.int-title { font-weight: 700; font-size: 0.9em; color: var(--blue); margin-bottom: 6px; }
+.int-time { font-size: 0.78em; color: #666; }
+.int-cell.focus { background: #fff8e1; border-top: 3px solid var(--amazon); }
+.int-cell.later { background: #f8f9fa; opacity: 0.75; }
+
+/* Science section */
+.section-h3 { font-weight: 700; color: var(--blue); margin-bottom: 8px; font-size: 0.95em; border-bottom: 2px solid var(--border); padding-bottom: 6px; margin-top: 16px; }
+.qa-block { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+.qa-q { background: #e8eaf6; padding: 9px 16px; font-weight: 700; font-size: 0.88em; color: #3949ab; }
+.qa-a { padding: 12px 16px; font-size: 0.88em; line-height: 1.7; background: #fff; }
+
+/* Opening script */
+.script { background: #0d1b2a; color: #e0e0e0; border-radius: 8px; padding: 22px 26px; font-size: 0.9em; line-height: 1.75; margin-bottom: 12px; }
+.script .ql { color: var(--amazon); font-weight: 700; margin-bottom: 10px; }
+.script em { color: #80cbc4; font-style: normal; }
+.script strong { color: var(--amazon); }
+
+/* Do/Don't */
+.dd { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+.do-box { background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: 14px 18px; }
+.dont-box { background: #fce4ec; border: 1px solid #f48fb1; border-radius: 8px; padding: 14px 18px; }
+.do-box h4 { color: var(--green); margin-bottom: 8px; }
+.dont-box h4 { color: var(--red); margin-bottom: 8px; }
+.do-box li, .dont-box li { margin-bottom: 5px; font-size: 0.88em; }
+
+/* Pills */
+.pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.pill { padding: 4px 13px; border-radius: 16px; font-size: 0.82em; font-weight: 600; }
+.p-o { background: var(--amazon); color: #fff; }
+.p-b { background: var(--blue); color: #fff; }
+.p-t { background: var(--teal); color: #fff; }
+.p-m { background: #e9ecef; color: #555; }
+.p-r { background: #fce4ec; color: var(--red); border: 1px solid #f48fb1; }
+
+/* Resume pitch boxes */
+.resume-role { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+.resume-role-title { padding: 10px 18px; font-weight: 700; background: var(--navy); color: var(--amazon); font-size: 0.9em; }
+.resume-role-body { padding: 14px 18px; font-size: 0.88em; line-height: 1.7; }
+.resume-role-body .pitch { border-left: 3px solid var(--teal); padding: 8px 12px; background: #f0faf9; border-radius: 0 6px 6px 0; margin: 8px 0; font-style: italic; color: #00695c; }
+.resume-role-body .bullets ul { padding-left: 18px; }
+.resume-role-body .bullets li { margin-bottom: 4px; }
+
+/* Code blocks */
+.code { background: #1a1a2e; color: #e0e0e0; padding: 12px 16px; border-radius: 6px; font-family: monospace; font-size: 0.82em; line-height: 1.9; margin: 8px 0; }
+.code .c1 { color: #80cbc4; }
+.code .c2 { color: #ffcc80; }
+.code .c3 { color: #ce93d8; }
+
+/* Tech grid */
+.tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tech-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.tech-card h4 { color: var(--blue); font-size: 0.9em; margin-bottom: 8px; }
+.tech-card ul { padding-left: 16px; font-size: 0.85em; }
+.tech-card li { margin-bottom: 4px; }
+
+/* Quote */
+.quote { background: #e8f4fd; border-left: 4px solid var(--blue); padding: 12px 18px; border-radius: 0 8px 8px 0; font-style: italic; margin: 12px 0; font-size: 0.92em; color: #1a3a5c; }
+
+@media (max-width: 700px) {
+  .dd { grid-template-columns: 1fr; }
+  .sprint-grid { grid-template-columns: 1fr; }
+  .int-grid { grid-template-columns: 1fr; }
+  .tech-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="page-header">
+  <h1>Amazon <span>Applied Scientist II</span> · Campaign Strategies · Agentic AI</h1>
+  <div class="sub">五场终版面试手册 · Tian Feng · April 2026 · 整合版（Job ID: 3188931）</div>
+  <div class="meta">
+    <span class="meta-item">🏢 NYC $172K–$223K / SEA $142K–$193K</span>
+    <span class="meta-item">👥 1.6M Advertisers · Sponsored Products &amp; Brands</span>
+    <span class="meta-item hot">📅 面试两天后 — 重点冲刺 BQ</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <a href="#sprint">2天计划</a>
+  <a href="#persona">人设</a>
+  <a href="#stories">故事库</a>
+  <a href="#lpmap">LP对照</a>
+  <a href="#int1">面试1</a>
+  <a href="#int2">面试2（BQ重点）</a>
+  <a href="#int3">面试3</a>
+  <a href="#int45">面试4&amp;5</a>
+  <a href="#opening">开场白</a>
+  <a href="#resume">简历怎么讲</a>
+  <a href="#tech">技术速查</a>
+</div>
+
+<!-- ====== 2-DAY SPRINT ====== -->
+<div class="card" id="sprint">
+  <div class="ch orange">⚡ 2天冲刺计划 — 按优先级执行</div>
+  <div class="cb">
+    <div class="sprint-grid">
+      <div class="sprint-day">
+        <div class="sprint-day-title d1">Day 1（今天）— 打地基</div>
+        <ul>
+          <li><strong>Morning:</strong> 通读本文档，把6个故事的框架记住</li>
+          <li><strong>Morning:</strong> 大声说出故事A（GenAI）和故事C（CVR），各说2遍，计时确保3–4分钟</li>
+          <li><strong>Afternoon:</strong> 大声说出故事B（MCP）、D（Strategy 7）、E（Reflexion）</li>
+          <li><strong>Afternoon:</strong> 把LP对照表背熟——每个LP对应哪个故事</li>
+          <li><strong>Evening:</strong> 读"技术速查"DPO和MCP部分，练习DPO一句话解释</li>
+          <li><strong>Evening:</strong> 练习开场白，90秒内说完</li>
+        </ul>
+      </div>
+      <div class="sprint-day">
+        <div class="sprint-day-title d2">Day 2（面试前）— 模拟</div>
+        <ul>
+          <li><strong>Morning:</strong> 模拟面试2全场（3x LP，30分钟）——自己对着镜子说或找朋友</li>
+          <li><strong>Morning:</strong> 模拟面试3的系统设计题（"Design an advertiser agent system"）15分钟</li>
+          <li><strong>Afternoon:</strong> 准备"你有什么问题要问我"——每场2个好问题</li>
+          <li><strong>Afternoon:</strong> 把故事F（年龄特征）练一遍，准备备用</li>
+          <li><strong>Before sleep:</strong> 只复习LP对照表和关键数字，不要再学新东西</li>
+          <li><strong>关键数字清单：</strong>58%、+6.5%、10×、-62%、12.3M、-30%、2mo→5min、$20M、21 teams</li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict warn" style="margin-top:14px">
+      <strong>⚠️ 两天后是前三场，后两场先不用准备</strong>
+      面试4（Coding）和面试5（Science Breadth）如果不是同一天，可以两天后再专门准备。不要现在分心。
+    </div>
+  </div>
+</div>
+
+<!-- ====== PERSONA ====== -->
+<div class="card" id="persona">
+  <div class="ch navy">① 你的人设 — 一句话，贯穿所有面试</div>
+  <div class="cb">
+    <div class="quote">
+      "I'm an applied scientist who has shipped production LLM agent systems end-to-end — from architecture and fine-tuning through evaluation, safety, and deployment — and I understand the advertiser domain from hands-on ads bidding work. I'm here to do the same for 1.6 million Amazon advertisers."
+    </div>
+
+    <p style="font-size:0.9em; margin-bottom:12px">这个人设的三个支柱：</p>
+    <div class="pills">
+      <span class="pill p-o">Production LLM Agent 全栈经验</span>
+      <span class="pill p-b">广告域 domain expertise（ROKT）</span>
+      <span class="pill p-t">Scale 思维（1.6M advertisers）</span>
+    </div>
+
+    <div class="verdict info" style="margin-top:14px">
+      <strong>这个人设对这个 JD 为什么有效：</strong>
+      Campaign Strategies 的核心挑战是把 LLM agent 可靠地落地到广告主实际工作流。你恰好两头都有——Capital One 的 agent 系统建设经验 + ROKT 的广告 ML 实操。多数候选人只有其一。
+    </div>
+
+    <div class="verdict warn">
+      <strong>⚠️ 这个岗的 GenAI 比例比想象中高</strong>
+      JD 核心词：agentic architectures, DPO/IPO, MCP, eval pipelines, safety, fine-tuning, multi-agent orchestration。
+      ROKT 的竞价 ML 经历（CVR、ROAS）是 domain background，不是主线。Capital One GenAI 是主线。
+    </div>
+  </div>
+</div>
+
+<!-- ====== 5-INTERVIEW OVERVIEW ====== -->
+<div class="card">
+  <div class="ch blue">② 五场面试总览 — 时间分配一览</div>
+  <div class="cb">
+    <div class="int-grid">
+      <div class="int-cell focus">
+        <div class="int-num">面试 #1 🔥</div>
+        <div class="int-title">Science Depth<br>+ 2x LP</div>
+        <div class="int-time">5min 介绍<br>20min LP × 2<br>30–35min 科学深度</div>
+      </div>
+      <div class="int-cell focus">
+        <div class="int-num">面试 #2 🔥🔥</div>
+        <div class="int-title">纯 BQ<br>3x LP</div>
+        <div class="int-time">5–10min 介绍<br>30min LP × 3<br>10min Q&amp;A</div>
+      </div>
+      <div class="int-cell focus">
+        <div class="int-num">面试 #3 🔥</div>
+        <div class="int-title">Science Application<br>+ 2x LP</div>
+        <div class="int-time">5min 介绍<br>20min LP × 2<br>30–35min 系统设计</div>
+      </div>
+      <div class="int-cell later">
+        <div class="int-num">面试 #4 — 下次备</div>
+        <div class="int-title">Coding (SDE1)<br>+ 2x LP</div>
+        <div class="int-time">20min LP<br>30–35min 算法</div>
+      </div>
+      <div class="int-cell later">
+        <div class="int-num">面试 #5 — 下次备</div>
+        <div class="int-title">Science Breadth<br>+ 2x LP</div>
+        <div class="int-time">20min LP<br>30–35min ML广度</div>
+      </div>
+    </div>
+
+    <div class="verdict good">
+      <strong>✅ 三场面试里的 LP 总量：7个问题</strong>
+      面试1：2个 LP | 面试2：3个 LP | 面试3：2个 LP。共需7个故事（可以复用，但同一个面试官不要重复）。你有6个核心故事，绰绰有余。
+    </div>
+  </div>
+</div>
+
+<!-- ====== STORY BANK ====== -->
+<div class="card" id="stories">
+  <div class="ch blue">③ 六大核心故事库 — STARR 完整脚本</div>
+  <div class="cb">
+
+    <p style="font-size:0.88em; color:#555; margin-bottom:16px;">每个故事约 250–300 字，对应 3–4 分钟口述。加上面试官追问，一道 LP 题控制在 8–10 分钟。黑体字是要说的原文，普通字是笔记提醒。</p>
+
+    <!-- STORY A -->
+    <div class="story">
+      <div class="story-head sa">⭐ Story A：Capital One GenAI End-to-End — 主力故事【Ownership · Deliver Results · Think Big · Earn Trust】</div>
+      <div class="story-body">
+        <div class="tag-row">
+          <span class="tag hit">Ownership</span><span class="tag hit">Deliver Results</span><span class="tag hit">Think Big</span><span class="tag hit">Earn Trust</span><span class="tag hit">Customer Obsession</span>
+        </div>
+        <div class="starr-label">S — Situation（1–2句，给背景）</div>
+        <div class="starr-s">"This was mid-2024 at Capital One. The Risk management organization was spending roughly two months per event on root cause analysis — manually querying databases, correlating signals, writing reports. Everyone knew AI could help, but the company had zero production GenAI in the Risk domain. There was significant skepticism from risk managers about whether an AI system could be trusted with regulatory-sensitive analysis."</div>
+
+        <div class="starr-label">T — Task（1句，你的目标）</div>
+        <div class="starr-t">"I took ownership of building and shipping the company's first production LLM system in Risk — end to end, from architecture to VP-level business case."</div>
+
+        <div class="starr-label">A — Action（这是重点，讲你自己做了什么）</div>
+        <div class="starr-a">"It started in an unexpected way — an intern PM came to me with an urgent PoC request. I had one week. I understood the data, built both a front-end and back-end from scratch, and delivered a working demo on a test dataset. We presented it together to stakeholders, and they were impressed enough to ask me to lead it as both project lead and tech lead. That one-week sprint became an 8-month production build — and it became the first GenAI use case ever deployed in Capital One's Risk domain.
+<br><br>
+I embedded myself with risk managers early — not to understand the stated problem, but to find where the 2-month bottleneck actually lived. Then I designed the full agent architecture: LLM at the center with RAG grounding in risk policy documents, tool calling for live data retrieval from internal systems, and query rewriting for the vague, context-heavy questions that domain experts ask.
+<br><br>
+The team grew from 3 to 12 people — I personally onboarded 9 of them, running ramp-up plans, architecture reviews, and coding standards. The hardest challenge wasn't the model — it was eval and trust. I ran a pre-ship audit, found 15% hallucination rate on a representative sample, and pushed back on the ship date. I implemented Reflexion: the model critiques its own output against defined accuracy criteria before returning a response. I also built automated regression suites and a monitoring dashboard for continuous oversight. Hallucination rate dropped 30%.
+<br><br>
+I also built the business case: ROI projections, VP presentations, framing this as a risk capacity investment rather than an AI experiment. That presentation influenced $10M+ in follow-on funding. We delivered in 8 months — roughly half the time comparable projects normally take. As the system proved its value, we expanded from 1 use case to 7 under the same unified architecture."</div>
+
+        <div class="starr-label">R — Result（数字）</div>
+        <div class="starr-r">"Analysis time went from 2 months to 5 minutes for 100+ risk managers. The system generated $20 million in measured business impact. Seven use cases now run on the same architecture I designed. My VP presentation directly influenced $10M+ in strategic AI investment decisions."</div>
+
+        <div class="starr-label">Reflection（1句，很多面试官会问）</div>
+        <div class="starr-ref">"What I'd do differently: build the eval infrastructure first, before building the model. I almost got it backwards — I had to fight to delay the ship date to get eval right. That lesson shapes everything I do in production AI now."</div>
+
+        <div class="nums" style="margin-top:12px;">
+          <strong>数字备查（要能脱口而出）：</strong>
+          <ul>
+            <li>2 months → 5 minutes</li>
+            <li>100+ risk managers</li>
+            <li>7 use cases on unified architecture</li>
+            <li>$10M+ investment influenced</li>
+            <li>$20M total measured impact</li>
+            <li>Hallucination -30%</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY B -->
+    <div class="story">
+      <div class="story-head sb">⭐ Story B：MCP Hackathon Multi-Agent — 创新故事【Invent &amp; Simplify · Learn &amp; Be Curious · Think Big】</div>
+      <div class="story-body">
+        <div class="tag-row">
+          <span class="tag hit">Invent and Simplify</span><span class="tag hit">Learn and Be Curious</span><span class="tag hit">Think Big</span><span class="tag warn">Bias for Action</span>
+        </div>
+        <div class="starr-label">S</div>
+        <div class="starr-s">"Capital One ran an internal AI hackathon — 21 competing teams, 48 hours. The challenge was open-ended: build an innovative AI application for fraud prevention. The bar was high — the judges had seen every variation of 'chatbot for X' and they were explicitly looking for architectural novelty."</div>
+
+        <div class="starr-label">T</div>
+        <div class="starr-t">"My goal was to build something that felt genuinely new — not just applying the latest model to an existing workflow, but using emerging AI primitives in a novel way."</div>
+
+        <div class="starr-label">A</div>
+        <div class="starr-a">"I decided to build a multi-agent adversarial simulation — attack agents trying to defeat defense agents, so the fraud team could discover attack strategies they hadn't anticipated.
+<br><br>
+The key architectural decision was using Model Context Protocol — MCP — which Anthropic had just published as an open standard. At the time, most people hadn't used it in production. I used MCP to standardize how each agent accessed its tools: every agent had its own MCP server exposing its capabilities — account query, transaction simulation, detection evasion — and a central orchestrator routed tasks through a unified client interface. This meant I could add or swap agents without rewiring the entire system.
+<br><br>
+For the attack agents, I used reinforcement learning with a simple reward signal: successfully completing a synthetic attack without triggering the detection system. The agents learned increasingly sophisticated evasion strategies through self-play. I spent roughly 20 hours on architecture and agent coordination, 10 hours on the RL reward shaping, and 8 hours on the demo pipeline."</div>
+
+        <div class="starr-label">R</div>
+        <div class="starr-r">"First place out of 21 teams. The judges specifically cited MCP as a novel and practical approach to agent coordination. The fraud team flagged two attack patterns the simulation discovered as genuinely new threat vectors they hadn't modeled."</div>
+
+        <div class="starr-label">Reflection</div>
+        <div class="starr-ref">"The insight was that agent coordination overhead — not model quality — is what kills multi-agent systems at scale. MCP gave us a clean abstraction to iterate fast. I now believe standardized tool protocols will be table stakes for production multi-agent systems within two years."</div>
+
+        <div class="nums" style="margin-top:12px;">
+          <strong>준비: 如果被追问"什么是MCP？"的一句话回答：</strong>
+          <ul>
+            <li>"MCP is an open protocol, published by Anthropic, that standardizes how LLMs discover and call tools — think of it as a REST API spec but for agent-tool interaction. The value isn't just convenience; it's that you can swap tools without retraining the model, which matters at scale."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY C -->
+    <div class="story">
+      <div class="story-head sc">⭐ Story C：CVR 高估诊断 — Deep Dive故事【Dive Deep · Bias for Action · Customer Obsession】</div>
+      <div class="story-body">
+        <div class="tag-row">
+          <span class="tag hit">Dive Deep</span><span class="tag hit">Bias for Action</span><span class="tag hit">Customer Obsession</span><span class="tag warn">Are Right A Lot</span>
+        </div>
+        <div class="starr-label">S</div>
+        <div class="starr-s">"At Rokt, our new campaigns were consistently underperforming in the learning phase — high spend, low conversions. The prevailing explanation was 'learning phase is always noisy' and people had largely accepted it. But the advertiser impact was real: they were burning budget with no return, which is a trust problem, not just a metric problem."</div>
+
+        <div class="starr-label">T</div>
+        <div class="starr-t">"I wanted to determine whether this was random variance or a systematic model failure — and if systematic, find and fix the root cause."</div>
+
+        <div class="starr-label">A</div>
+        <div class="starr-a">"I started the same day without waiting for buy-in. I ran a full EDA across all campaigns in the portfolio, comparing CVR predictions to actual conversion rates across different campaign segments.
+<br><br>
+Within a day I found a clear pattern: 58% of campaigns had systematic CVR over-prediction. The average bias was +6.5%, but the tail was alarming — some campaigns had predictions 10 times higher than actual. This wasn't noise; it was a structural issue.
+<br><br>
+I dug deeper into the root cause. The common factor in over-predicted campaigns was conversion type heterogeneity — the same user action was labeled as different conversion types across different advertisers, depending on their individual pixel configurations. The model was learning from inconsistent labels, creating systematic bias for campaigns whose conversion type mix differed from the training distribution.
+<br><br>
+I designed 12 feature variants to test different standardization approaches. Variant 6 — a cross-advertiser conversion type taxonomy I called 'Lightning Rod' — proved to be the strongest: it mapped heterogeneous advertiser-specific conversion events to a standardized set of seven canonical types, giving the model consistent labels to learn from."</div>
+
+        <div class="starr-label">R</div>
+        <div class="starr-r">"Identified that 58% of active campaigns were affected, with effective CPA inflated 3–5× for those advertisers. The Lightning Rod feature significantly improved CVR calibration in the learning phase. More importantly, the diagnosis reframed the problem from 'expected noise' to 'fixable data quality issue.'"</div>
+
+        <div class="starr-label">Reflection</div>
+        <div class="starr-ref">"The lesson: 'the model is working fine on average' is not the same as 'the model is working fine.' I now build systematic calibration audits across subgroups into every model review — average performance is the last thing you should check."</div>
+
+        <div class="nums" style="margin-top:12px;">
+          <strong>数字备查：</strong>
+          <ul>
+            <li>58% of active campaigns affected</li>
+            <li>+6.5% average CVR over-prediction bias</li>
+            <li>10× worst-case over-prediction</li>
+            <li>CPA inflated 3–5× for affected campaigns</li>
+            <li>12 feature variants tested</li>
+            <li>V6 "Lightning Rod" = winning variant</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY D -->
+    <div class="story">
+      <div class="story-head sd">⭐ Story D：Strategy 7 生产事故 — Ownership故事【Dive Deep · Ownership · Insist on Highest Standards · Have Backbone】</div>
+      <div class="story-body">
+        <div class="tag-row">
+          <span class="tag hit">Dive Deep</span><span class="tag hit">Ownership</span><span class="tag hit">Insist on Highest Standards</span><span class="tag warn">Have Backbone</span>
+        </div>
+        <div class="starr-label">S</div>
+        <div class="starr-s">"This was a production incident at Rokt. A campaign switched bidding strategies from CPA to ROAS, but the configuration update was incomplete — only one of the two required fields was updated. The pricing system entered an inconsistent state we call 'Strategy 7,' where the system was configured for ROAS but still using CPA-mode quality scoring. Nobody caught it during the update."</div>
+
+        <div class="starr-label">T</div>
+        <div class="starr-t">"I needed to diagnose the revenue impact, find the exact root cause, and ensure this class of failure couldn't happen again."</div>
+
+        <div class="starr-label">A</div>
+        <div class="starr-a">"I started with impact quantification — quality score went from 0.017 to 0.0006, a 97% collapse. Win rate dropped to zero across 12.3 million auctions. Daily revenue was down 62%. This was not a small incident.
+<br><br>
+I traced the root cause through auction logs in Trino, cross-referencing timestamps across the bidding engine, pricing service, and relevancy scoring systems. I identified the exact field mismatch: 'relevancy_target_roas' had been updated but the 'bidStrategy' enum field had not, creating a contradictory config state that no existing validation layer caught.
+<br><br>
+Immediate fix was to restore the config to a consistent state. But then I pushed back on stopping there. There was pressure to document the incident and move on — this was a busy period. I argued that this incident revealed a systemic design flaw: our config system allowed invalid states that should be impossible by construction. I proposed and built a validation layer that cross-checks dependent fields before committing any bidding strategy update, making Strategy 7 and similar inconsistent states impossible to enter."</div>
+
+        <div class="starr-label">R</div>
+        <div class="starr-r">"Root cause documented. Validation layer accepted and implemented. No recurrence of this class of incident since. The 12.3M auction impact was contained to a single campaign over a short window."</div>
+
+        <div class="starr-label">Reflection</div>
+        <div class="starr-ref">"Production failures are architectural feedback. A hotfix addresses symptoms; a good engineer uses the failure to identify what invariant the system should have enforced. The cost of the deeper fix is always less than the cost of the next incident."</div>
+
+        <div class="nums" style="margin-top:12px;">
+          <strong>数字备查：</strong>
+          <ul>
+            <li>Quality score: 0.017 → 0.0006 (97% drop)</li>
+            <li>Win rate: 0% across 12.3M auctions</li>
+            <li>Daily revenue: −62%</li>
+            <li>Root cause: relevancy_target_roas / bidStrategy field mismatch</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY E -->
+    <div class="story">
+      <div class="story-head se">⭐ Story E：NeMO Vendor → 内部自研 — 【Have Backbone; Disagree &amp; Commit】真实 disagreement with manager 故事</div>
+      <div class="story-body">
+        <div class="tag-row">
+          <span class="tag hit">Have Backbone; Disagree &amp; Commit</span><span class="tag hit">Ownership</span><span class="tag hit">Deliver Results</span><span class="tag warn">Invent and Simplify</span>
+        </div>
+        <p style="font-size:0.84em; color:#555; margin-bottom:10px;">这是最真实的"disagree with manager"故事。有明确的分歧（继续 vs 放弃项目）、有独立执行（4个月自己做）、有可量化结果（outperform vendor，上线生产）。</p>
+
+        <div class="starr-label">S</div>
+        <div class="starr-s">"At Capital One, our team was working with an external vendor to upgrade one of our production ASR models using NeMO — NVIDIA's speech AI framework. I was the technical point of contact, going deep into their architecture with their engineers. The collaboration was productive. Then leadership decided to terminate the engagement entirely due to data privacy: the vendor's fine-tuning process required uploading customer call data to their external infrastructure, which didn't meet compliance requirements. The project was officially killed."</div>
+
+        <div class="starr-label">T</div>
+        <div class="starr-t">"I believed the underlying technical approach was valuable independent of the vendor relationship. The privacy concern was real, but it was a constraint on deployment, not on the technology. I needed to convince my manager to let me replicate the work internally on our own compliant infrastructure."</div>
+
+        <div class="starr-label">A</div>
+        <div class="starr-a">"I didn't just accept the decision as final. I documented everything I'd learned about the vendor's architecture from our technical sessions, studied our existing codebase to understand what would need to change, and built a specific internal proposal: I separated the two decisions my manager had implicitly bundled together — 'we should drop the vendor' and 'we should drop the approach' — and argued that only the first was justified.
+<br><br>
+I put together a concrete timeline: roughly 3 months to train an equivalent model on our internal data, 1 month to deploy through our production review process. I presented this to my manager with a clear risk profile — if I failed to hit the benchmarks, we'd have lost 4 months of my time, but we'd have confirmed that the vendor's approach wasn't replicable. That was worth knowing.
+<br><br>
+My manager was initially skeptical — re-opening a killed project is a hard sell when the team has other priorities. After a few conversations, I got the allocation. I went deep into our codebase, incorporated the NeMO architectural improvements I'd learned from the vendor's technical team, trained the model on our internally-approved dataset, and led it through the full production deployment process."</div>
+
+        <div class="starr-label">R</div>
+        <div class="starr-r">"The in-house model outperformed the vendor's solution on our internal benchmarks. It deployed to production 4 months after I started. We improved ASR model performance, eliminated the vendor cost entirely, and maintained full data privacy compliance. A project that had been officially killed became one of the most impactful model upgrades of that year."</div>
+
+        <div class="starr-label">Reflection</div>
+        <div class="starr-ref">"The distinction that matters is: 'not with this vendor' versus 'not with this technology.' Leadership made the right call terminating the vendor — that was a legitimate compliance decision. But when a decision is correct for one reason and incorrect for another, the right response is to isolate which part is wrong and propose a path that addresses only that constraint. Present it as two separate decisions, not one."</div>
+
+        <div class="nums" style="margin-top:12px;">
+          <strong>关键数字 &amp; 追问准备：</strong>
+          <ul>
+            <li>3 months training + 1 month deployment = 4 months total</li>
+            <li>Outperformed vendor on internal benchmarks</li>
+            <li>Deployed to production serving live customer calls</li>
+            <li>Eliminated vendor cost + resolved data privacy concern</li>
+          </ul>
+          <strong style="margin-top:8px; display:block;">如果被追问"你说服了manager，但如果最终失败了呢？"：</strong>
+          <div style="font-style:italic; color:#555; font-size:0.88em;">"That was part of the proposal — I explicitly scoped the downside: 4 months of my time to confirm whether the approach was replicable. That's a bounded, acceptable risk. I wasn't asking to gamble the team's roadmap, just my own allocation."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY F -->
+    <div class="story">
+      <div class="story-head sf">Story F：年龄特征反直觉发现 — 备用【Are Right, A Lot】</div>
+      <div class="story-body">
+        <div class="tag-row">
+          <span class="tag hit">Are Right, A Lot</span><span class="tag warn">Dive Deep</span><span class="tag warn">Insist on Highest Standards</span>
+        </div>
+        <p style="font-size:0.85em; color:#666; margin-bottom:8px;">这是备用故事。如果被问"Are Right, A Lot"且前5个故事都用过了，用这个。</p>
+
+        <div class="starr-label">S</div>
+        <div class="starr-s">"At Rokt, I was building a credit card approval prediction model using 165 features from four data sources — auction signals, user profiles, credit bureau data, and custom-designed features. This was a model that directly affected advertiser spend and approval rates, so prediction accuracy mattered."</div>
+
+        <div class="starr-label">T</div>
+        <div class="starr-t">"My goal was to find the optimal feature set through rigorous ablation — not just feature importance ranking, but actual holdout performance."</div>
+
+        <div class="starr-label">A</div>
+        <div class="starr-a">"I ran systematic leave-one-out ablations across all 165 features. The surprising result was that removing age improved accuracy by 0.30 percentage points. Age is one of the most widely-used features in credit models — conventional wisdom says it should be predictive. I ran multiple validation checks: different time splits, different advertiser subsets, alternative operationalizations of age. The improvement was consistent.
+<br><br>
+The explanation was a correlation artifact in our specific data slice — but more importantly, the methodological takeaway was clear: domain intuition should inform which hypotheses to test, not which conclusions to accept."</div>
+
+        <div class="starr-label">R</div>
+        <div class="starr-r">"Removed age from the feature set. +0.30pp improvement in prediction accuracy, which translates directly into advertiser ROI. The model was also more robust across age demographics."</div>
+
+        <div class="starr-label">Reflection</div>
+        <div class="starr-ref">"Data science intuition is a good hypothesis generator, not a good hypothesis validator. Systematic ablations are now a non-negotiable part of every feature set I ship."</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====== LP MAP ====== -->
+<div class="card" id="lpmap">
+  <div class="ch teal">④ LP → 故事对照表 — 面试时选哪个故事</div>
+  <div class="cb" style="padding:0;">
+    <table class="lpt">
+      <thead>
+        <tr>
+          <th style="width:22%">Leadership Principle</th>
+          <th style="width:30%">主力故事（首选）</th>
+          <th style="width:25%">备用故事</th>
+          <th style="width:23%">关键一句</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="lp-name-cell">🎯 Customer Obsession</span></td>
+          <td><span class="primary-story">Story C（CVR — 广告主在烧钱）</span></td>
+          <td><span class="backup-story">Story A（GenAI — 风险分析师等了2个月）</span></td>
+          <td style="font-size:0.82em; color:#555;">"Advertisers were burning budget with no return — that's a trust problem."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">🏗️ Ownership</span></td>
+          <td><span class="primary-story">Story A（GenAI — 从0到1，8个月，全拿）</span></td>
+          <td><span class="backup-story">Story D（Strategy 7 — 自己追根因，推systemic fix）</span></td>
+          <td style="font-size:0.82em; color:#555;">"I treated it as my product, not my project."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">💡 Invent and Simplify</span></td>
+          <td><span class="primary-story">Story B（MCP Hackathon — 用新协议解决老问题）</span></td>
+          <td><span class="backup-story">Story A（Reflexion — 把复杂幻觉问题简化为迭代自纠正循环）</span></td>
+          <td style="font-size:0.82em; color:#555;">"MCP standardized agent coordination without retraining."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">✅ Are Right, A Lot</span></td>
+          <td><span class="primary-story">Story F（年龄特征 — 数据否定直觉）</span></td>
+          <td><span class="backup-story">Story C（CVR — 系统性而非随机误差）</span></td>
+          <td style="font-size:0.82em; color:#555;">"I trusted the ablation over my prior — that's what good data science looks like."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">📚 Learn and Be Curious</span></td>
+          <td><span class="primary-story">Story B（主动学 MCP，用到生产）</span></td>
+          <td><span class="backup-story">讲你主动研究 Amazon auction mechanics、DPO 论文</span></td>
+          <td style="font-size:0.82em; color:#555;">"I don't wait to be assigned training — I read papers and run experiments."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">📏 Insist on Highest Standards</span></td>
+          <td><span class="primary-story">Story A（GenAI — 拒绝带15%幻觉的系统上线，推迟3周建eval基础设施）</span></td>
+          <td><span class="backup-story">Story D（Strategy 7 — 推 systemic fix 不止 hotfix）</span></td>
+          <td style="font-size:0.82em; color:#555;">"One hallucination in a regulatory context sets back AI adoption by a year."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">🔭 Think Big</span></td>
+          <td><span class="primary-story">Story A（从1个 use case 扩展到7，影响 $10M 投资）</span></td>
+          <td><span class="backup-story">Story B（MCP 将成为 multi-agent 标准协议的判断）</span></td>
+          <td style="font-size:0.82em; color:#555;">"We designed the architecture for 7 use cases from day one."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">⚡ Bias for Action</span></td>
+          <td><span class="primary-story">Story C（立刻跑 EDA，没等授权）</span></td>
+          <td><span class="backup-story">Story B（Hackathon 48小时，直接做）</span></td>
+          <td style="font-size:0.82em; color:#555;">"I didn't wait for perfect information — I designed experiments to reduce uncertainty fast."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">🤝 Earn Trust</span></td>
+          <td><span class="primary-story">Story A（VP 演示建立信任 + Reflexion eval 让风险经理信任 AI）</span></td>
+          <td><span class="backup-story">Story E（NeMO — 向 manager 证明自己能在 4 个月内 outperform vendor）</span></td>
+          <td style="font-size:0.82em; color:#555;">"Stakeholders trust systems with transparent failure modes, not just good averages."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">🔍 Dive Deep</span></td>
+          <td><span class="primary-story">Story D（Trino 追查 Strategy 7 字段不一致）</span></td>
+          <td><span class="backup-story">Story C（EDA 发现58%系统性偏差）</span></td>
+          <td style="font-size:0.82em; color:#555;">"I don't stop at symptoms — I trace to the exact root cause."</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">🦴 Have Backbone; Disagree &amp; Commit</span></td>
+          <td><span class="primary-story">Story E（NeMO — 管理层关掉项目，我说服他们让我自建，4个月上线 outperform vendor）</span></td>
+          <td><span class="backup-story">Story D（拒绝只做 hotfix，要求 systemic validation layer）</span></td>
+          <td style="font-size:0.82em; color:#555;">"I separated two decisions that were bundled together — 'drop the vendor' vs 'drop the approach.'"</td>
+        </tr>
+        <tr>
+          <td><span class="lp-name-cell">📈 Deliver Results</span></td>
+          <td><span class="primary-story">Story A（最多数字：$20M, 2mo→5min, 7 cases）</span></td>
+          <td><span class="backup-story">任何有数字的故事都可</span></td>
+          <td style="font-size:0.82em; color:#555;">结尾必须有数字，没有就说方向性结论 + 为什么难量化。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ====== INTERVIEW 1 ====== -->
+<div class="card" id="int1">
+  <div class="ch blue">⑤ 面试 #1：Science Depth + 2x LP</div>
+  <div class="cb">
+    <div class="verdict info">
+      <strong>时间分配：5min 介绍 → 20min LP × 2 → 30–35min Science Depth</strong>
+      Science Depth 在后半场。先把 LP 答好，再进入科学深度部分。
+    </div>
+
+    <div class="section-h3">科学深度 — 选什么方向？</div>
+    <div class="verdict good">
+      <strong>✅ 选择：LLM Agent Systems（你最强，且直接命中 JD）</strong>
+      你不需要选传统 ML（竞价/CVR）作为深度方向。这个岗的面试官关心 agent 架构、eval、fine-tuning。Capital One 的工作给了你真实的 end-to-end 生产经验——这是很多候选人没有的。
+    </div>
+
+    <div class="section-h3">Science Depth 高频问题 &amp; 回答框架</div>
+
+    <div class="qa-block">
+      <div class="qa-q">Q: Walk me through the architecture of an LLM agent system you built in production.</div>
+      <div class="qa-a"><strong>用 Story A 的 Action 部分，加技术细节：</strong>
+        <br>• RAG pipeline: embedding model → vector store → top-K retrieval → context injection
+        <br>• Tool calling: schema definition → LLM generates JSON → validation → execution → result injection
+        <br>• ReACT loop: Thought → Action → Observation → repeat until completion or max turns
+        <br>• Reflexion layer: critique response → identify failures → regenerate with feedback
+        <br>• Safety guardrails: output classification → escalation trigger → human-in-the-loop for sensitive categories
+        <br><br>
+        <strong>关键话术：</strong>"The hardest engineering challenge wasn't the model — it was context management. Tool results accumulate fast across turns. We implemented a summarization step at turn 5 to compress earlier context without losing grounding."
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Q: How would you evaluate a multi-step agent? What metrics matter?</div>
+      <div class="qa-a">
+        <strong>不要只说 accuracy。框架：</strong>
+        <br>• <strong>Task completion rate</strong> (did the agent finish the goal?) — primary metric
+        <br>• <strong>Step efficiency</strong> (did it take the minimum necessary tool calls, or did it loop?)
+        <br>• <strong>Tool call precision</strong> (did it call the right tool with correct parameters?)
+        <br>• <strong>Hallucination rate</strong> (factual accuracy of generated content vs. tool outputs)
+        <br>• <strong>Safety trigger rate</strong> (how often does it correctly escalate vs. false trigger?)
+        <br>• <strong>Downstream impact</strong> (for advertiser agents: did the recommendation improve campaign performance?)
+        <br><br>
+        <strong>关键话术：</strong>"Accuracy on individual steps is a necessary but not sufficient condition. An agent that gets every step right but takes 12 steps to do a 3-step task is not production-ready."
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Q: RAG vs fine-tuning for domain adaptation — when do you choose each?</div>
+      <div class="qa-a">
+        <strong>答题框架（Amazon 喜欢 tradeoff 分析）：</strong>
+        <br>• <strong>RAG</strong>: 知识需要实时更新、知识量大、需要 citation/grounding、数据无法用于训练（机密）
+        <br>• <strong>Fine-tuning</strong>: 需要特定输出格式/风格、需要特定 reasoning 模式、latency 要求高（无法 retrieve）、知识相对静态
+        <br>• <strong>组合</strong>: 先 SFT 教模型"如何思考 advertiser 问题"，再 RAG 注入实时 campaign 数据 — 这是我在 Capital One 用的方式
+        <br><br>
+        <strong>关键话术：</strong>"For advertiser guidance specifically, I'd use both: fine-tune on historical advertiser interaction data to align tone and reasoning style, then use RAG to inject live campaign stats and auction data. They solve different parts of the adaptation problem."
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">Q: What are the failure modes you're most concerned about in production agent systems?</div>
+      <div class="qa-a">
+        <strong>展示你的"Tool Failure Taxonomy"（这是你的研究兴趣）：</strong>
+        <br>• Model-side: wrong tool selection, bad parameter generation, hallucinated tool calls, over-calling loops
+        <br>• System-side: execution failures, stale data, state drift in multi-step workflows
+        <br><br>
+        <strong>重点放在 state drift：</strong>"The hardest failure mode isn't a single tool call failing — it's state drift in multi-step execution. Step 3 succeeds but changes the environment in a way that makes step 5's assumption invalid, and the agent doesn't detect the inconsistency. Current retry logic doesn't help with this. It's the agentic equivalent of a transaction isolation problem in databases."
+      </div>
+    </div>
+
+    <div class="section-h3">面试 #1 LP — 推荐故事分配</div>
+    <div class="verdict info">
+      Science Depth 面试官往往会问与科学工作相关的 LP，常见组合：<br>
+      <strong>推荐 LP1: Dive Deep</strong> → Story D（Strategy 7）<br>
+      <strong>推荐 LP2: Ownership</strong> → Story A（GenAI end-to-end）
+    </div>
+  </div>
+</div>
+
+<!-- ====== INTERVIEW 2 ====== -->
+<div class="card" id="int2">
+  <div class="ch orange">⑥ 面试 #2：纯 BQ — 3x LP【最重要，重点备】</div>
+  <div class="cb">
+    <div class="verdict warn">
+      <strong>⚠️ 这场面试没有技术题，100% 是 LP。30分钟，3道题，每题约10分钟。</strong>
+      这是 Amazon bar raiser 最可能出现的面试。Amazon bar raiser 的目标是找出你是否真的符合 Amazon 文化，而不只是技术能力。数据、ownership、标准，缺一不可。
+    </div>
+
+    <div class="section-h3">最可能被问的 LP（按出现概率排序）</div>
+
+    <div class="qa-block">
+      <div class="qa-q">💎 高频 LP1: "Tell me about a time you had to deal with a failure or make a mistake. How did you respond?"</div>
+      <div class="qa-a">
+        <strong>推荐：Story C（CVR）或 Story D（Strategy 7）— 选一个"误判 → 诊断 → 修复"结构清晰的</strong><br><br>
+        Story D 的结构更完整（有具体错误、量化影响、根因分析、系统改进）。但 Story C 也适合，因为可以诚实地说"我们一开始误判了这是正常噪音，这是错误的"。<br><br>
+        <strong>注意</strong>：Amazon 问失败时，不想听到"我很快就修好了，没什么影响"。他们想看到你 own it，学到什么，以及系统级的 fix。
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">💎 高频 LP2: "Tell me about a time you drove a major innovation."</div>
+      <div class="qa-a">
+        <strong>推荐：Story B（MCP Hackathon）</strong><br><br>
+        这是"Invent and Simplify"的经典问法。核心要素：新颖的想法（MCP for agent coordination）+ 解决了具体问题 + 有实际结果（1st/21 teams）+ 可推广（MCP 将成为标准）。<br><br>
+        <strong>或者用 Story A 的 "从1扩展到7 use cases" 角度</strong>，展示 Think Big。
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">💎 高频 LP3: "Describe a time you disagreed with someone and had to push back."</div>
+      <div class="qa-a">
+        <strong>推荐：Story E（拒绝带 15% 幻觉的系统上线）</strong><br><br>
+        "Have Backbone; Disagree and Commit" 是 Amazon 最独特的 LP，很多候选人答得很弱（"我提了建议但团队没采纳"或"我最后听了领导的"）。你的故事有三个关键要素：<br>
+        1. 你有数据支撑（15% error rate audit）<br>
+        2. 你提了具体方案（不只是"不行"，是"这是3周内我会做的"）<br>
+        3. 结果证明你是对的（adoption rate, no hallucination incidents）
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">其他常见问法速查</div>
+      <div class="qa-a">
+        <table style="width:100%; font-size:0.87em; border-collapse:collapse;">
+          <tr style="background:#f8f9fa;"><td style="padding:7px 10px; font-weight:600; color:var(--blue);">问法</td><td style="padding:7px 10px; font-weight:600; color:var(--blue);">对应LP</td><td style="padding:7px 10px; font-weight:600; color:var(--blue);">推荐故事</td></tr>
+          <tr><td style="padding:7px 10px; border-top:1px solid var(--border);">"Tell me about a project with the biggest impact"</td><td style="padding:7px 10px; border-top:1px solid var(--border);">Deliver Results</td><td style="padding:7px 10px; border-top:1px solid var(--border);">Story A</td></tr>
+          <tr style="background:#f8f9fa;"><td style="padding:7px 10px;">"Tell me about a time you used data to make a decision"</td><td style="padding:7px 10px;">Are Right, A Lot</td><td style="padding:7px 10px;">Story F 或 Story C</td></tr>
+          <tr><td style="padding:7px 10px; border-top:1px solid var(--border);">"Describe a time you went above and beyond for a customer"</td><td style="padding:7px 10px; border-top:1px solid var(--border);">Customer Obsession</td><td style="padding:7px 10px; border-top:1px solid var(--border);">Story C（把广告主当"客户"）</td></tr>
+          <tr style="background:#f8f9fa;"><td style="padding:7px 10px;">"Tell me about a time you learned something new quickly"</td><td style="padding:7px 10px;">Learn and Be Curious</td><td style="padding:7px 10px;">Story B（MCP）或主动学习 auction theory</td></tr>
+          <tr><td style="padding:7px 10px; border-top:1px solid var(--border);">"Describe a high-ambiguity situation you navigated"</td><td style="padding:7px 10px;">Bias for Action + Ownership</td><td style="padding:7px 10px;">Story C（从"新活动差"到58%发现）</td></tr>
+          <tr style="background:#f8f9fa;"><td style="padding:7px 10px;">"Tell me about a time you earned trust"</td><td style="padding:7px 10px;">Earn Trust</td><td style="padding:7px 10px;">Story A（VP 演示）或 Story E（eval 基础设施）</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">💎 高频 LP4: "Tell me about your biggest failure / a mistake you made / difficult feedback you received."</div>
+      <div class="qa-a">
+        <strong>推荐：MVP 演示失败故事（你的 BQ 文档里最好的"失败"故事）</strong><br><br>
+        <strong>S:</strong> "Early in my career at Capital One, I was given a rare opportunity to present a project to a Managing Vice President — a senior executive two levels above me. This was unusual for someone at my level, and it was a project I'd invested significant work in."<br><br>
+        <strong>T:</strong> "My goal was to secure her buy-in on our technical direction and get resources to scale the project."<br><br>
+        <strong>A:</strong> "I prepared the way I always had — detailed technical slides, model architecture diagrams, evaluation metrics, ablation results. About five minutes in, I could see I was losing her. She was checking her phone. The meeting ended politely but inconclusively.
+        <br><br>
+        Afterward, my manager and skip-level gave me very direct feedback: I had prepared for a technical review, not an executive presentation. Leaders at that level are thinking about strategy, business impact, and risk — not model architecture. I had treated a business decision as a science fair.
+        <br><br>
+        I took that seriously. I researched how senior leaders at Capital One — many with MBA backgrounds — actually made decisions. I studied McKinsey and BCG presentation formats: action titles, pyramid principle, minimum color complexity, leading with the recommendation not the analysis. I spent several nights rebuilding my communication style entirely. Then I requested a follow-up meeting with the MVP one month later, with updated project results."<br><br>
+        <strong>R:</strong> "In the second meeting, she was engaged from the first slide. She commented directly that this presentation was much more effective. The follow-up led to her endorsement of the project direction and unlocked resources for the next phase. That feedback loop — from failed presentation to executive buy-in — became the model I've used ever since."<br><br>
+        <strong>Reflection:</strong> "My mistake wasn't a lack of effort. It was a fundamental misunderstanding of my audience. The best technical work is worthless if it doesn't land with the decision-maker in front of you. Now, before any important presentation, the first question I ask is: what decision does this person need to make, and what do they need from me to make it confidently?"<br><br>
+        <span style="font-size:0.85em; color:var(--teal);">⭐ 这个故事的亮点：真实、有 learning，结局是正面的（follow-up 成功了），展示了 self-awareness + 快速学习 + 不放弃。Amazon 面试官特别欣赏你能明确说出"这是我的错"而不是推卸给外部因素。</span>
+      </div>
+    </div>
+
+    <div class="section-h3">BQ 答题通用原则</div>
+    <div class="dd">
+      <div class="do-box">
+        <h4>✅ 一定要做的</h4>
+        <ul>
+          <li>每个故事<strong>以数字结尾</strong>——没有数字就说"directional improvement of ~X%, we didn't have clean measurement because..."</li>
+          <li>强调<strong>你自己做了什么</strong>——不是"我们团队"，是"我设计了/我诊断了/我建了"</li>
+          <li><strong>Reflection 很重要</strong>——Amazon 的 STARR 有第五个 R。每道题都说一句你学到了什么</li>
+          <li>保持<strong>具体和量化</strong>——"significant improvement"不够，"58%的活动受影响"才够</li>
+          <li>说完 S 和 T 后，<strong>主动问</strong>："Do you want me to go deeper on any specific aspect of the action I took?" — 给面试官控制权</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>❌ 要避免的</h4>
+        <ul>
+          <li>只说"我们做了X"不说你的具体贡献</li>
+          <li>Situation 讲太长，Action 才是重点</li>
+          <li>失败故事里结尾说"还好最后没太大影响"——Amazon 要看你从失败里学到什么</li>
+          <li>讲超过10分钟——如果面试官没有打断你，你自己要缩短</li>
+          <li>用虚假或夸大数字——如果不确定，说"approximately"或"in the range of"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== INTERVIEW 3 ====== -->
+<div class="card" id="int3">
+  <div class="ch teal">⑦ 面试 #3：Science Application + 2x LP</div>
+  <div class="cb">
+    <div class="verdict info">
+      <strong>时间分配：5min 介绍 → 20min LP × 2 → 30–35min Science Application</strong>
+      Science Application = 系统设计题 + 模糊问题拆解。关键是：<strong>问澄清问题</strong>。JD 说"interviewers intentionally withhold vital information."
+    </div>
+
+    <div class="section-h3">最可能的系统设计题</div>
+    <div class="qa-block">
+      <div class="qa-q">"Design an agentic AI system to help Amazon advertisers optimize their campaigns." (会从更模糊的版本开始)</div>
+      <div class="qa-a">
+        <strong>Step 1：先问澄清问题（花3–5分钟，不要急着设计）</strong>
+        <ul style="padding-left:18px; margin-top:8px; font-size:0.9em;">
+          <li>"What's the primary channel — conversational UI in ad console, proactive recommendations, or both?"</li>
+          <li>"Which advertiser segment are we prioritizing? SMBs who need more guidance, or sophisticated advertisers who want automation?"</li>
+          <li>"What does 'optimize' mean here — campaign budget allocation, keyword selection, bid adjustments, or all three?"</li>
+          <li>"What's the latency expectation — real-time chat response (&lt;2s) or async workflow (minutes)?"</li>
+          <li>"Are there actions the agent can take autonomously, or is it advisory only?"</li>
+          <li>"What does success look like — advertiser satisfaction, campaign performance improvement, cost reduction?"</li>
+        </ul>
+        <br>
+        <strong>Step 2：Frame the problem（after getting answers）</strong>
+        <div style="background:#f8f9fa; border-radius:6px; padding:10px 14px; margin-top:6px; font-size:0.88em;">
+          "OK, so I'll design for conversational + proactive recommendations for SMB advertisers, focused on bid optimization and keyword recommendations, with the agent being advisory but able to queue actions for one-click confirmation. The success metric is recommendation acceptance rate and downstream ROAS improvement. Let me walk through the three architectural layers."
+        </div>
+        <br>
+        <strong>Step 3：三层架构（对应 JD 的技术栈）</strong>
+        <ul style="padding-left:18px; margin-top:6px; font-size:0.88em;">
+          <li><strong>Foundation (Model)：</strong>Base LLM + SFT on advertiser interaction data → instruction-tune for "advertiser assistant" persona → DPO from implicit feedback (advertiser applies/ignores recommendation)</li>
+          <li><strong>Capability (Tools via MCP)：</strong>auction_simulator, keyword_suggestion_api, campaign_analytics, competitive_benchmark, budget_optimizer. Key: MCP standardizes tool access so we can add tools without retraining.</li>
+          <li><strong>Orchestration：</strong>ReACT for conversational single-step queries. For complex multi-step planning (e.g., "restructure my entire campaign"), use planner-executor: planner generates a step list, executor runs each step with human confirmation gates for irreversible actions.</li>
+        </ul>
+        <br>
+        <strong>Step 4：强调 Eval + Safety（这是你的差异化）</strong>
+        <div style="font-size:0.88em;">"Evaluation is where I'd spend disproportionate time. Task completion rate is the north star, but I'd also track tool call precision — did the agent call the right tools? — and downstream campaign performance on a 2-week lag. For safety: advertiser actions are often irreversible — a bid increase that runs for a week can't be undone. I'd implement a confirmation gate for any action above a threshold impact, and a dry-run mode so advertisers can see the predicted outcome before committing."</div>
+        <br>
+        <strong>Step 5：Trade-offs to proactively mention</strong>
+        <ul style="padding-left:18px; margin-top:6px; font-size:0.88em;">
+          <li>"Personalization vs consistency: a fully personalized agent is hard to audit; a consistent agent may miss individual advertiser context. I'd start with consistent behavior and add personalization layers incrementally."</li>
+          <li>"Latency vs accuracy: synchronous tool calls increase response time. I'd pre-fetch likely tool outputs when the advertiser opens the console."</li>
+          <li>"Autonomy vs trust: the right default for new advertisers is advisory-only; for established advertisers who have accepted many recommendations, we can gradually expand autonomous actions with explicit opt-in."</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-h3">面试 #3 LP — 推荐故事分配</div>
+    <div class="verdict info">
+      Application 面试官往往问模糊问题处理能力相关的 LP：<br>
+      <strong>推荐 LP1: Bias for Action</strong> → Story C（CVR — 没等待就开始 EDA）<br>
+      <strong>推荐 LP2: Think Big</strong> → Story A（GenAI — 从1到7 use cases，影响 $10M 投资）
+    </div>
+  </div>
+</div>
+
+<!-- ====== INTERVIEWS 4 & 5 ====== -->
+<div class="card" id="int45">
+  <div class="ch navy">⑧ 面试 4&5 — 本次先记要点，下次深度备</div>
+  <div class="cb">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div>
+        <div class="section-h3" style="margin-top:0;">面试 #4：Coding (SDE1) + 2x LP</div>
+        <div class="verdict warn" style="font-size:0.88em;">
+          <strong>Coding bar = LeetCode Medium</strong><br>
+          Amazon AS 的 coding 考的是算法清晰度，不是 hard DP。
+        </div>
+        <ul style="padding-left:18px; font-size:0.87em; margin-top:8px;">
+          <li style="margin-bottom:5px;"><strong>语言：</strong>用 Python，最熟的</li>
+          <li style="margin-bottom:5px;"><strong>高频题型：</strong>Hash map / sliding window / binary search / tree traversal</li>
+          <li style="margin-bottom:5px;"><strong>流程：</strong>先说思路 → 写代码 → 说 time/space complexity → 问 edge cases</li>
+          <li style="margin-bottom:5px;"><strong>LP 推荐：</strong>Deliver Results（Story A）+ Dive Deep（Story D）</li>
+          <li style="margin-bottom:5px;"><strong>准备（下次）：</strong>刷10道 LC medium（array/string/hash），练写边说</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-h3" style="margin-top:0;">面试 #5：Science Breadth + 2x LP</div>
+        <div class="verdict warn" style="font-size:0.88em;">
+          <strong>Breadth = 广度比较，不是深度</strong><br>
+          考"为什么选这个方法而不是那个"，以及 SOTA 感知。
+        </div>
+        <ul style="padding-left:18px; font-size:0.87em; margin-top:8px;">
+          <li style="margin-bottom:5px;"><strong>核心框架：</strong>经典 ML → transformer/LLM → RL → RAG → agent</li>
+          <li style="margin-bottom:5px;"><strong>必须能讲：</strong>为什么用 LightGBM vs DNN，为什么用 RAG vs fine-tune，DPO vs PPO</li>
+          <li style="margin-bottom:5px;"><strong>SOTA 要提：</strong>GRPO（DeepSeek-R1），IPO，multi-agent eval</li>
+          <li style="margin-bottom:5px;"><strong>LP 推荐：</strong>Learn &amp; Be Curious（Story B）+ Are Right A Lot（Story F）</li>
+          <li style="margin-bottom:5px;"><strong>准备（下次）：</strong>背 DPO/PPO/RAG/ReACT 的一句话对比</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== OPENING STATEMENT ====== -->
+<div class="card" id="opening">
+  <div class="ch purple">⑨ "Tell me about yourself" — 90秒开场白</div>
+  <div class="cb">
+    <div class="script">
+      <div class="ql">Q: Walk me through your background.</div>
+      "I'm an applied scientist with a PhD from UCLA and four years of industry experience, primarily focused on building and shipping production LLM agent systems.<br><br>
+
+      Most recently at <strong>Capital One</strong>, I delivered the company's first production GenAI system in the Risk domain — an LLM agent that reduced a 2-month root cause analysis process to <em>5 minutes</em> for 100+ risk managers. The architecture included <em>ReACT reasoning, RAG grounding, tool calling, and a Reflexion-based self-correction loop</em> that cut hallucination rate by 30%. I also won the internal AI hackathon by building a <em>multi-agent system using Model Context Protocol</em> for agent coordination — first place out of 21 teams.<br><br>
+
+      Currently I'm at <strong>Rokt</strong>, a real-time transaction marketing platform, on the ads bidding team. I've been doing CVR and ROAS optimization work, and I've also been building an <em>LLM-based campaign monitoring agent</em> that proactively surfaces optimization recommendations — which is directly analogous to what Campaign Strategies is building.<br><br>
+
+      What draws me to this role is specific: a <em>personalized, context-aware agentic guidance system for 1.6 million advertisers</em>, using MCP, preference optimization, and multi-step planning. That's exactly the intersection I find most technically interesting — and where I believe I can contribute from day one."
+    </div>
+    <div class="verdict good">
+      <strong>✅ 这个开场的设计逻辑</strong>
+      PhD credential → Capital One 三件事（agent system + eval + MCP）→ ROKT 衔接广告域 → 为什么这个具体岗位吸引你（不是泛泛说"Amazon is great"）。严格控制在90秒内。
+    </div>
+  </div>
+</div>
+
+<!-- ====== RESUME PITCH ====== -->
+<div class="card" id="resume">
+  <div class="ch green">⑩ 简历怎么讲 — 各段经历的口头 Pitch</div>
+  <div class="cb">
+    <p style="font-size:0.88em; color:#555; margin-bottom:14px;">当面试官说"说一下你在 X 公司做的事"或深挖某段经历时，用以下框架。先说人设，再说具体工作，最后说影响。</p>
+
+    <div class="resume-role">
+      <div class="resume-role-title">🟠 ROKT（当前，Dec 2025–present）</div>
+      <div class="resume-role-body">
+        <div class="pitch">"Rokt is a real-time transaction marketing platform — we show ads at checkout on e-commerce sites. I'm on the ads bidding team, working on the ML systems that determine how we price and win impressions."</div>
+        <div class="bullets">
+          <strong>要强调的工作（按重要性）：</strong>
+          <ul>
+            <li>CVR calibration issue diagnosis → 58% campaigns, Lightning Rod feature（给 Customer Obsession / Dive Deep 问题用）</li>
+            <li>ROAS value prediction model → 自定义 loss function（Huber + log1p），给 Science Depth 问题用</li>
+            <li>LLM campaign monitoring agent（non-conversational advertiser guidance）→ 直接类比 Campaign Strategies 的工作</li>
+            <li>Strategy 7 incident（production debugging，给 Dive Deep / Ownership 问题用）</li>
+          </ul>
+        </div>
+        <div class="verdict warn" style="margin-top:10px; font-size:0.85em;">
+          <strong>⚠️ 注意</strong>：ROKT 入职才5个月，不要主动说"我在那里时间不长"。直接说工作内容和影响。如果被问到，说："Five months is short in tenure, but I've had very high velocity — I've shipped a production model, diagnosed a major calibration issue, and done a full production incident investigation."
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-role">
+      <div class="resume-role-title">🔵 Capital One（2022–2025，DS Manager / Principal DS）</div>
+      <div class="resume-role-body">
+        <div class="pitch">"Capital One is where most of my GenAI work happened. I was a Data Science Manager and Principal Data Scientist in the Risk organization — which is where I built the company's first production LLM agent system."</div>
+        <div class="bullets">
+          <strong>要强调的工作（按重要性对这个 JD）：</strong>
+          <ul>
+            <li><strong>主力：</strong>GenAI end-to-end（ReACT + RAG + tool calling + Reflexion）→ $20M impact（Story A）</li>
+            <li><strong>主力：</strong>MCP Hackathon（multi-agent orchestration, RL, 1st/21 teams）（Story B）</li>
+            <li><strong>辅助：</strong>ASR Conformer 生产模型（75M calls/yr）→ 展示 production ML 宽度</li>
+            <li><strong>Manager 角色：</strong>一句话带过，"I led a team of 3 DS and 2 MLE"，不要展开讲管理</li>
+          </ul>
+        </div>
+        <div class="verdict good" style="margin-top:10px; font-size:0.85em;">
+          <strong>✅ 话术</strong>："My title was DS Manager, but I stayed hands-on throughout. I designed the architectures myself, wrote significant portions of the core code, and owned the science decisions. The management responsibility was real, but this role was always 70% individual science contribution."
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-role">
+      <div class="resume-role-title">🎓 PhD UCLA Geophysics（2016–2022）</div>
+      <div class="resume-role-body">
+        <div class="pitch">"My PhD was in applied machine learning — I used deep learning and probabilistic methods to analyze large-scale geophysical datasets. I published 8 papers with 400+ citations, including in Nature Geoscience, the top journal in my field."</div>
+        <div class="bullets">
+          <strong>要说的和不要说的：</strong>
+          <ul>
+            <li>✅ 说："The skills that transferred most are systematic experimental design, rigorous model evaluation, and the ability to read and apply cutting-edge ML research quickly."</li>
+            <li>✅ 说："My PhD taught me that a good scientist doesn't just apply methods — they understand when a method's assumptions are violated and what to do about it."</li>
+            <li>❌ 不要深入解释地震学内容（说"applied DL at large scale"就够了）</li>
+            <li>❌ 不要用超过30秒在 PhD 上（unless asked directly）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="verdict info">
+      <strong>如果被问到 CFA：</strong>"I passed CFA Level II — it gives me a strong quantitative finance background, which is useful for understanding advertiser ROI models and budget optimization. But it's not the primary lens I bring to this role." 然后转移话题。
+    </div>
+  </div>
+</div>
+
+<!-- ====== TECH REFERENCE ====== -->
+<div class="card" id="tech">
+  <div class="ch navy">⑪ 技术速查 — DPO · MCP · ReACT（背下来，可能被直接问）</div>
+  <div class="cb">
+
+    <div class="section-h3">DPO vs PPO — 一句话对比（面试必考）</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:16px; font-size:0.86em;">
+      <div style="padding:14px 16px; background:#e8eaf6; border-right:1px solid var(--border);">
+        <div style="font-weight:700; color:#3949ab; margin-bottom:8px;">PPO（3-step RLHF）</div>
+        <ul style="padding-left:14px;">
+          <li style="margin-bottom:3px;">SFT → reward model → PPO policy update</li>
+          <li style="margin-bottom:3px;">需要同时维护 4 个模型（actor, critic, RM, reference）</li>
+          <li style="margin-bottom:3px;">On-policy，能做 online exploration</li>
+          <li style="margin-bottom:3px;">训练不稳定，计算贵</li>
+        </ul>
+        <div style="margin-top:8px; font-weight:700; color:#3949ab;">面试一句话：</div>
+        <div style="font-style:italic; color:#555; font-size:0.9em;">"PPO is on-policy RL — powerful but expensive, needs 4 models in memory, and prone to reward hacking."</div>
+      </div>
+      <div style="padding:14px 16px; background:#e8f5e9;">
+        <div style="font-weight:700; color:#2e7d32; margin-bottom:8px;">DPO（1-step）</div>
+        <ul style="padding-left:14px;">
+          <li style="margin-bottom:3px;">直接从 (prompt, chosen, rejected) 优化 policy</li>
+          <li style="margin-bottom:3px;">只需 2 个模型（policy + reference）</li>
+          <li style="margin-bottom:3px;">离线训练，稳定，数据效率高</li>
+          <li style="margin-bottom:3px;">对 preference 数据质量极度敏感</li>
+        </ul>
+        <div style="margin-top:8px; font-weight:700; color:#2e7d32;">面试一句话：</div>
+        <div style="font-style:italic; color:#555; font-size:0.9em;">"DPO collapses three steps into one contrastive loss — simpler and stable, but offline, so it can't explore beyond the training distribution."</div>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">如果被问到 β 的含义（DPO 的 β 参数）：</div>
+      <div class="qa-a">
+        "β controls how far the fine-tuned policy can deviate from the reference model. High β = more conservative, stays close to SFT checkpoint. Low β = more aggressive alignment, but risk of distribution collapse. Typical values are 0.1 to 0.5."
+      </div>
+    </div>
+
+    <div class="section-h3" style="margin-top:16px;">ReACT Agent 工作原理</div>
+    <div class="code">
+      <span class="c1">Loop until task_complete or max_turns:</span><br>
+      &nbsp;&nbsp;<span class="c2">Thought:</span> "I need to get campaign stats for advertiser 123 to check ROAS"<br>
+      &nbsp;&nbsp;<span class="c3">Action:</span> get_campaign_stats(advertiser_id=123, metric="roas", period="7d")<br>
+      &nbsp;&nbsp;<span class="c1">Observation:</span> { "roas": 1.2, "target_roas": 3.0, "spend": 5000 }<br>
+      &nbsp;&nbsp;<span class="c2">Thought:</span> "ROAS is 1.2 vs target 3.0 — underbidding. I should check keyword CPC."<br>
+      &nbsp;&nbsp;<span class="c3">Action:</span> get_keyword_performance(...)
+    </div>
+
+    <div class="section-h3" style="margin-top:16px;">MCP 架构（3 要素）</div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h4>MCP Server（工具侧）</h4>
+        <ul>
+          <li>暴露 Tools（可调用函数）</li>
+          <li>暴露 Resources（可读数据，如 campaign 历史）</li>
+          <li>通过 list_tools() 让 client 发现</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <h4>MCP Client（Agent 侧）</h4>
+        <ul>
+          <li>连接 server，拉取工具列表</li>
+          <li>把工具注入 LLM context</li>
+          <li>把 LLM 的 tool call 路由到正确 server</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:12px;">"MCP 的核心价值不是让 tool call 更容易，而是工具生态标准化——任何 MCP-compatible 工具都可以插入任何 MCP-compatible agent，不需要重新训练。对 Amazon 的广告工具生态（auction API, keyword API, analytics API）非常有价值。"</div>
+
+    <div class="section-h3" style="margin-top:16px;">弱点预案 — DPO 没有生产经验</div>
+    <div class="verdict bad">
+      <strong>❌ 不要说：</strong>"我没有做过 DPO，这块我需要学习。"
+    </div>
+    <div class="verdict good">
+      <strong>✅ 正确框架（3步）：</strong><br>
+      1. 展示你理解机制："DPO collapses RLHF's three steps into a single contrastive loss over (prompt, chosen, rejected) triples, optimizing the policy to increase the relative probability of chosen over rejected responses. β controls the KL divergence constraint."<br><br>
+      2. 用 Reflexion 类比："In production, I implemented Reflexion — conceptually related: the model generates, critiques against criteria, and regenerates. It's a form of online preference-driven self-correction. DPO is the offline formalization of the same idea."<br><br>
+      3. 说明快速上手："I've read the DPO and IPO papers, I know the TRL implementation, and I have a specific plan to run a small experiment in the next week. Given my SFT experience, the ramp-up will be fast."
+    </div>
+
+    <div class="section-h3" style="margin-top:16px;">你要问面试官的问题</div>
+    <ul style="padding-left:18px; font-size:0.89em;">
+      <li style="margin-bottom:7px;">"The JD mentions both conversational and non-conversational advertiser experiences — does the team currently have separate systems for each, or a unified agent?"</li>
+      <li style="margin-bottom:7px;">"For preference optimization, where does your primary training signal come from — human annotation, implicit advertiser behavior, or something else?"</li>
+      <li style="margin-bottom:7px;">"How does the team think about the safety boundary for autonomous actions? For example, can the agent directly modify campaign bids, or is it always advisory?"</li>
+      <li style="margin-bottom:7px;">"What's the biggest technical challenge the team is facing right now that I'd be expected to work on in the first 6 months?"</li>
+    </ul>
+    <div class="verdict warn" style="margin-top:10px; font-size:0.88em;">
+      <strong>⚠️ 不要问：</strong>"你们用 GPT 还是 Claude？" 或 "你们的 infra 是什么？" — 暗示你只是个用户，不是科学家。
+    </div>
+
+  </div>
+</div>
+
+<footer style="text-align:center; color:#999; font-size:0.78em; padding:30px 0;">
+  整合版 · Amazon AS-II Campaign Strategies · Job ID 3188931 · Tian Feng · April 2026 · 前三场面试重点冲刺
+</footer>
+
+</div>
+</body>
+</html>

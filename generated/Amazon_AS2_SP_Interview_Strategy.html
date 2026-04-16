@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon AS-II · SP&B · 面试策略手册 — Tian Feng</title>
+<style>
+:root {
+  --amazon: #FF9900;
+  --amazon-dark: #c67400;
+  --navy: #131921;
+  --blue: #1a5276;
+  --teal: #0e6655;
+  --red: #c0392b;
+  --green: #1e8449;
+  --light: #f8f9fa;
+  --border: #dee2e6;
+  --warn-bg: #fff8e1;
+  --warn-border: #f9a825;
+  --good-bg: #e8f5e9;
+  --good-border: #43a047;
+  --bad-bg: #fce4ec;
+  --bad-border: #e91e63;
+  --purple: #6a1b9a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a1a; background: #f0f2f5; line-height: 1.65; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 24px 16px 80px; }
+
+/* Header */
+.page-header { background: var(--navy); color: #fff; border-radius: 10px; padding: 32px 40px; margin-bottom: 24px; position: relative; overflow: hidden; }
+.page-header::before { content: ''; position: absolute; right: -40px; top: -40px; width: 200px; height: 200px; background: rgba(255,153,0,0.12); border-radius: 50%; }
+.page-header h1 { font-size: 1.7em; font-weight: 700; }
+.page-header h1 span { color: var(--amazon); }
+.page-header .sub { margin-top: 8px; opacity: 0.8; font-size: 0.92em; }
+.page-header .meta { margin-top: 14px; display: flex; gap: 24px; flex-wrap: wrap; }
+.meta-item { background: rgba(255,255,255,0.1); padding: 5px 14px; border-radius: 20px; font-size: 0.85em; }
+
+/* Level badge */
+.level-row { display: flex; gap: 0; margin-bottom: 24px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.level-cell { flex: 1; padding: 16px 20px; text-align: center; background: #fff; border-right: 1px solid var(--border); }
+.level-cell:last-child { border-right: none; }
+.level-cell.active { background: var(--amazon); color: #fff; }
+.level-cell.active .lname { font-weight: 700; font-size: 1.05em; }
+.level-cell .lcode { font-size: 0.78em; opacity: 0.7; margin-bottom: 3px; font-family: monospace; }
+.level-cell .lname { font-weight: 600; }
+.level-cell .lrange { font-size: 0.78em; margin-top: 3px; opacity: 0.75; }
+.level-cell.you-are { border: 2px solid var(--amazon); }
+
+/* Cards */
+.card { background: #fff; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+.card-header { padding: 14px 24px; font-weight: 700; font-size: 1em; letter-spacing: 0.3px; display: flex; align-items: center; gap: 10px; }
+.card-header.amazon-orange { background: var(--amazon); color: #fff; }
+.card-header.navy { background: var(--navy); color: #fff; }
+.card-header.blue { background: var(--blue); color: #fff; }
+.card-header.teal { background: var(--teal); color: #fff; }
+.card-header.purple { background: var(--purple); color: #fff; }
+.card-body { padding: 20px 24px; }
+
+/* Verdict box */
+.verdict { border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; }
+.verdict.good { background: var(--good-bg); border-left: 4px solid var(--green); }
+.verdict.warn { background: var(--warn-bg); border-left: 4px solid var(--warn-border); }
+.verdict.bad { background: var(--bad-bg); border-left: 4px solid var(--bad-border); }
+.verdict strong { display: block; margin-bottom: 4px; }
+
+/* Storyline */
+.storyline { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px; overflow: hidden; }
+.story-title { background: var(--light); padding: 11px 18px; font-weight: 700; color: var(--blue); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.story-body { padding: 14px 18px; }
+.story-body p { margin-bottom: 8px; font-size: 0.93em; }
+.story-body .hook { font-style: italic; color: var(--teal); font-size: 0.9em; border-left: 3px solid var(--teal); padding-left: 10px; margin: 10px 0; }
+.story-body .evidence { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; margin-top: 8px; font-size: 0.88em; }
+.story-body .evidence ul { padding-left: 16px; }
+.story-body .evidence li { margin-bottom: 3px; }
+
+/* Mapping table */
+.map-table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+.map-table th { background: var(--navy); color: #fff; padding: 9px 14px; text-align: left; }
+.map-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.map-table tr:last-child td { border-bottom: none; }
+.map-table tr:nth-child(even) td { background: var(--light); }
+.jd-req { font-weight: 600; color: var(--blue); }
+.your-proj { color: var(--teal); }
+.talk-point { font-size: 0.83em; color: #555; margin-top: 3px; }
+
+/* Do/Don't */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.do-box { background: var(--good-bg); border: 1px solid var(--good-border); border-radius: 8px; padding: 14px 18px; }
+.dont-box { background: var(--bad-bg); border: 1px solid var(--bad-border); border-radius: 8px; padding: 14px 18px; }
+.do-box h4 { color: var(--green); margin-bottom: 8px; }
+.dont-box h4 { color: var(--red); margin-bottom: 8px; }
+.do-box ul, .dont-box ul { padding-left: 16px; }
+.do-box li, .dont-box li { margin-bottom: 5px; font-size: 0.9em; }
+
+/* LP cards */
+.lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.lp-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.lp-card .lp-name { background: var(--navy); color: var(--amazon); padding: 8px 14px; font-weight: 700; font-size: 0.88em; }
+.lp-card .lp-body { padding: 12px 14px; font-size: 0.87em; }
+.lp-card .lp-body .project { font-weight: 600; color: var(--blue); }
+.lp-card .lp-body .angle { color: #555; margin-top: 3px; }
+
+/* Focus pills */
+.focus-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.pill { padding: 5px 14px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+.pill.primary { background: var(--amazon); color: #fff; }
+.pill.secondary { background: var(--navy); color: #fff; }
+.pill.tertiary { background: var(--blue); color: #fff; }
+.pill.muted { background: #e9ecef; color: #555; }
+
+/* Quote box */
+.quote { background: #e8f4fd; border-left: 4px solid var(--blue); padding: 12px 18px; border-radius: 0 8px 8px 0; font-style: italic; margin: 12px 0; font-size: 0.93em; color: var(--blue); }
+
+/* Section label */
+.section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 6px; }
+
+/* Timeline */
+.opening { background: linear-gradient(135deg, #131921 60%, #1a3a4a); color: #fff; border-radius: 8px; padding: 20px 24px; margin-bottom: 12px; }
+.opening .q { color: var(--amazon); font-weight: 700; margin-bottom: 8px; }
+.opening .a { font-size: 0.92em; line-height: 1.7; }
+.opening .a em { color: #aed6f1; font-style: normal; }
+.opening .a strong { color: var(--amazon); }
+
+@media (max-width: 600px) {
+  .do-dont { grid-template-columns: 1fr; }
+  .lp-grid { grid-template-columns: 1fr; }
+  .level-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Header -->
+<div class="page-header">
+  <h1>Amazon <span>Applied Scientist II</span> · Sponsored Products &amp; Brands</h1>
+  <div class="sub">面试策略手册 · Tian Feng · April 2026</div>
+  <div class="meta">
+    <span class="meta-item">🏢 NYC · Search R&amp;I Team</span>
+    <span class="meta-item">💰 $172K–$223K (L5 NYC)</span>
+    <span class="meta-item">📋 Job ID: 3154707</span>
+    <span class="meta-item">🎯 Target Level: L5</span>
+  </div>
+</div>
+
+<!-- ① Level Reality Check -->
+<div class="card">
+  <div class="card-header amazon-orange">① 级别现实认知 — AS-II vs Senior AS，你在哪里？</div>
+  <div class="card-body">
+    <div class="level-row">
+      <div class="level-cell">
+        <div class="lcode">L4</div>
+        <div class="lname">Applied Scientist I</div>
+        <div class="lrange">新博士 / 0–2yr</div>
+      </div>
+      <div class="level-cell active you-are">
+        <div class="lcode">L5 ← 这个职位</div>
+        <div class="lname">Applied Scientist II</div>
+        <div class="lrange">$172K–$223K (NYC)<br>3–6yr production ML</div>
+      </div>
+      <div class="level-cell">
+        <div class="lcode">L6</div>
+        <div class="lname">Senior Applied Scientist</div>
+        <div class="lrange">独立立项 / 7+yr / 跨团队影响</div>
+      </div>
+      <div class="level-cell">
+        <div class="lcode">L7</div>
+        <div class="lname">Principal Applied Scientist</div>
+        <div class="lrange">org-level science leader</div>
+      </div>
+    </div>
+
+    <div class="verdict good">
+      <strong>✅ L5 对你是适配而非降级</strong>
+      你的头衔（Senior MLE @ ROKT，DS Manager @ Capital One）比 L5 听起来高，但 Amazon 的 level 系统和外部 title 不等价。你的实际经验（3yr production ML，PhD，ads bidding 实操）正好落在 L5 甜蜜区。L5 的 bar 是"独立完成模糊项目 + 产出 business impact"——你完全满足。
+    </div>
+    <div class="verdict warn">
+      <strong>⚠️ 不要主动聊"我觉得我够 L6"</strong>
+      如果 recruiter 或 hiring manager 主动提 level 对话，可以说"我对 level 持开放态度，更关注团队和问题空间"。Amazon level negotiation 在 offer 阶段谈，面试期间不主动开口。
+    </div>
+    <div class="verdict warn">
+      <strong>⚠️ "Manager 经历"要谨慎使用</strong>
+      AS-II 是 IC（Individual Contributor）轨。你的 Capital One DS Manager 经历是加分项（说明 ownership 和 communication），但不要把 50% 时间花在讲"管理团队"上——他们雇的是能自己动手做科学的人。管理经历点到为止，重心放在你的 science contribution。
+    </div>
+  </div>
+</div>
+
+<!-- ② 核心人设 -->
+<div class="card">
+  <div class="card-header navy">② 你的人设 — 一句话定位</div>
+  <div class="card-body">
+    <div class="quote">
+      "I'm an ads ML scientist who closes the loop between research and production — I understand auction mechanics at the system level, I can model complex multi-objective tradeoffs, and I've shipped bidding algorithms that move revenue metrics in the real world."
+    </div>
+
+    <p style="margin-bottom:14px">这个人设的关键是<strong>三个闭环</strong>：</p>
+
+    <div class="storyline">
+      <div class="story-title">🔬 闭环 1：Research ↔ Production</div>
+      <div class="story-body">
+        <p>很多 scientists 只会 notebook，很多 engineers 不懂 science。你两头都有：PhD 研究训练（8 篇论文，Nature Geoscience）+ 真实生产系统（ROKT 实时竞价，Capital One 75M calls/yr ASR）。</p>
+        <div class="hook">面试中的体现：每个项目都讲到"我们最终上线了，效果是 X"</div>
+      </div>
+    </div>
+
+    <div class="storyline">
+      <div class="story-title">⚖️ 闭环 2：Multi-objective（三方利益平衡）</div>
+      <div class="story-body">
+        <p>JD 的核心词是 "balance the interests of advertisers, shoppers, and Amazon"。这正是 ads ML 的本质困难。你在 ROKT 做的 ROAS 竞价、CVR 校准、Strategy 7 事故本质上都是 multi-objective tradeoff。</p>
+        <div class="hook">面试中的体现：主动用"三方利益"框架来组织你的项目叙述</div>
+      </div>
+    </div>
+
+    <div class="storyline">
+      <div class="story-title">📊 闭环 3：Ambiguity → Structured Experiment → Metric Impact</div>
+      <div class="story-body">
+        <p>JD 要求 "high degree of ambiguity"。你的 CVR 高估诊断（从"新活动钱烧了没效果"→ 系统性 EDA → 定位 58% 活动受影响 → 特征工程 12 变体）完美展示了这个能力。</p>
+        <div class="hook">面试中的体现：叙述时强调"问题最开始很模糊，我是如何拆解的"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ③ 四大核心叙事 -->
+<div class="card">
+  <div class="card-header blue">③ 四大核心叙事 — 用这四个故事覆盖 80% 的问题</div>
+  <div class="card-body">
+
+    <div class="storyline">
+      <div class="story-title">🌟 Story A：CVR 高估诊断 → 特征工程 → 上线【主力故事，最重要】</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>Tell me about a time you solved a complex ambiguous problem / 你做过最有影响力的 ML 项目</p>
+        <div class="hook">
+          "We noticed new campaigns were over-spending with poor conversions in the learning phase. Nobody knew why — the loss was real but the cause was unclear. I ran a systematic EDA across all campaigns and found 58% had CVR over-prediction, with an average bias of +6.5%. The root cause was inconsistent conversion-type labeling — same user action labeled differently across advertisers. I designed 12 feature variants; V6 — a cross-advertiser standardized conversion type taxonomy — became the key fix."
+        </div>
+        <div class="evidence">
+          <strong>关键数字要记住：</strong>
+          <ul>
+            <li>58% of campaigns affected</li>
+            <li>+6.5% average bias, worst case 10× over-prediction</li>
+            <li>Effective CPA inflated 3–5×</li>
+            <li>12 feature variants designed and tested</li>
+            <li>V6 (conversion type) = best performing variant</li>
+          </ul>
+        </div>
+        <p style="margin-top:10px"><strong>Amazon 面试官想听到什么：</strong>你怎么从模糊现象走到可测量假设，怎么设计对照实验，怎么量化业务影响。</p>
+      </div>
+    </div>
+
+    <div class="storyline">
+      <div class="story-title">⚡ Story B：Strategy 7 事故调查【展示系统级理解】</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>Tell me about a time you dealt with a production failure / Dive Deep / 系统设计题引申</p>
+        <div class="hook">
+          "A campaign switched from CPA to ROAS bidding but only updated one config field — the pricing system entered an inconsistent state called Strategy 7. Quality score dropped 97%, win rate went to 0% across 12.3M auctions, daily revenue dropped 62%. I traced the root cause through auction logs in Trino, identified the exact field mismatch, and proposed a validation layer to prevent the inconsistency."
+        </div>
+        <div class="evidence">
+          <strong>关键数字：</strong>
+          <ul>
+            <li>Quality score: 0.017 → 0.0006 (97% drop)</li>
+            <li>Win rate: 0% across 12.3M auctions</li>
+            <li>Daily revenue: −62%</li>
+            <li>Root cause: config field mismatch between relevancy_target_roas and bidStrategy</li>
+          </ul>
+        </div>
+        <p style="margin-top:10px"><strong>Amazon 面试官想听到什么：</strong>你能 deep dive 进 production system，有 ownership 心态，能从事故里总结 systemic fix（而不只是 hotfix）。</p>
+      </div>
+    </div>
+
+    <div class="storyline">
+      <div class="story-title">🏦 Story C：信用卡全漏斗分析 + 特征工程【展示 science rigor】</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>ML methodology / feature engineering / 如何做严格的实验</p>
+        <div class="hook">
+          "I built a full-funnel dataset with 1.18M credit card applications from 45 advertisers across 3 years, analyzing 165 features from 4 sources including credit bureau data. The most surprising finding was that age — intuitively useful — was net-harmful: removing it improved prediction by 0.30pp. This is a great example of why you have to test rather than assume."
+        </div>
+        <div class="evidence">
+          <strong>关键数字：</strong>
+          <ul>
+            <li>1.18M applications, 49 campaigns, 45 advertisers</li>
+            <li>165 features across 4 sources (auction, profile, Experian, self-designed)</li>
+            <li>Age feature: removing it → +0.30pp accuracy</li>
+            <li>3-year dataset (2023–2026)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="storyline">
+      <div class="story-title">🤖 Story D：Capital One GenAI 系统 $20M【展示 end-to-end + 影响力】</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>Leadership / Think Big / 你做过影响最大的项目</p>
+        <div class="hook">
+          "I delivered Capital One's first production GenAI system in the Risk domain — reduced root cause analysis from 2 months to 5 minutes for 100+ risk managers. It expanded to 7 use cases and I presented to VP+ to influence $10M+ investment decisions. This wasn't just about building the model — it was about owning the problem end-to-end."
+        </div>
+        <p style="margin-top:8px; font-size:0.88em; color:#888">注：这个故事主要用来展示你的 ownership 和 impact，不是技术 deep dive。</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ④ JD关键词 → 你的项目映射 -->
+<div class="card">
+  <div class="card-header teal">④ JD 关键词 → 你的具体项目对照表</div>
+  <div class="card-body" style="padding: 0;">
+    <table class="map-table">
+      <thead>
+        <tr>
+          <th style="width:28%">JD 要求</th>
+          <th style="width:35%">你的对应项目</th>
+          <th style="width:37%">怎么说</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="jd-req">Real-time ML for ad allocation (billions/day)</span></td>
+          <td><span class="your-proj">ROKT RTB 竞价系统；Strategy 7 事故（1230万次竞拍追踪）</span></td>
+          <td><div class="talk-point">强调 latency constraints，online inference，auction mechanics。ROKT 是真实 RTB，竞价量虽不到 Amazon 量级，但机制完全一致。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-req">Multi-objective optimization using deep learning</span></td>
+          <td><span class="your-proj">ROAS vs CPA vs traffic quality tradeoff；CVR + CTR 双目标校准</span></td>
+          <td><div class="talk-point">用"三方利益"框架：advertiser (ROAS/CPA)，user (relevance)，platform (revenue)。你在 ROKT 天天做这个 tradeoff。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-req">High ambiguity, scale, complexity</span></td>
+          <td><span class="your-proj">CVR 高估诊断（从无从下手到 58% 发现）</span></td>
+          <td><div class="talk-point">从"新活动表现差"到结构化 EDA，12 个特征变体，定量结论——展示你的 problem decomposition。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-req">Research new ML approaches</span></td>
+          <td><span class="your-proj">PhD 8 papers / 400+ citations；Lightning Rod 标准化；ROAS 自定义 loss functions</span></td>
+          <td><div class="talk-point">说明你有 research sensibility（知道什么是新颖、什么是增量），不只是 apply existing tools。Huber + log1p 自定义 loss 就是小但真实的创新。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-req">Balance advertiser / shopper / Amazon interests</span></td>
+          <td><span class="your-proj">ROAS 竞价 vs CPA；Audience Filter；信用卡审批率分析</span></td>
+          <td><div class="talk-point">主动说"这类问题我认为本质是 constrained optimization：在 user experience 约束下最大化 advertiser value，同时 platform revenue 不退步。"</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-req">Recruit &amp; mentor scientists</span></td>
+          <td><span class="your-proj">Capital One：管理 3 DS / 2 MLE；paper reading groups；GenAI seminars</span></td>
+          <td><div class="talk-point">点到为止，一两句话说明你有 mentorship 经验，不要花太多时间在这上面（AS-II 是 IC role）。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-req">Python / programming proficiency</span></td>
+          <td><span class="your-proj">ROAS pipeline (10K+ LOC)；Spark feature engineering；LightGBM；DeadlineRadar (Next.js)</span></td>
+          <td><div class="talk-point">准备一两道 coding 题：sliding window / DP / graph。Amazon bar 不高，但不能垫底。重点是 clean code + edge cases。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-req">Data mining / numerical optimization</span></td>
+          <td><span class="your-proj">信用卡 165 特征分析；CVR EDA；自定义 loss；PD controller</span></td>
+          <td><div class="talk-point">PD controller 是 control theory 应用，展示你的 math / optimization 宽度不只局限于 DL。</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ⑤ 开场白模板 -->
+<div class="card">
+  <div class="card-header purple">⑤ "Tell me about yourself" 开场白模板</div>
+  <div class="card-body">
+    <div class="opening">
+      <div class="q">Q: Tell me about yourself / Walk me through your background</div>
+      <div class="a">
+        "Sure. I'm a machine learning scientist with a PhD from UCLA and about four years of industry experience, mostly at the intersection of <em>ads ML</em> and <em>large-scale production systems</em>.<br><br>
+
+        Right now I'm at <strong>Rokt</strong>, which is a real-time bidding and transaction marketing platform. My focus is on the ads bidding team — I work on <em>CVR prediction, ROAS optimization, and campaign stability</em>. Concretely, I built the ROAS value prediction model for one of our key advertisers, diagnosed a systemic CVR overestimation issue that was affecting 58% of campaigns in the learning phase, and I've been doing deep work on conversion-type feature engineering to improve cold-start accuracy.<br><br>
+
+        Before that I was at <strong>Capital One</strong>, where I led the first production GenAI application in the Risk domain — reducing a 2-month analysis process to 5 minutes for over 100 risk managers. That taught me a lot about <em>owning end-to-end ML systems under real business constraints</em>.<br><br>
+
+        What excites me about this role is the Sponsored Products auction scale — <em>billions of allocation decisions per day</em>, with a genuine three-sided optimization challenge between shoppers, advertisers, and Amazon. That's exactly the kind of problem I want to be working on."
+      </div>
+    </div>
+    <div class="verdict good" style="margin-top:12px">
+      <strong>✅ 这个开场的逻辑</strong>
+      PhD + production → ads bidding 实操（ROKT 直接相关）→ end-to-end ownership（Capital One）→ 为什么 Amazon SP 吸引你（不是泛泛，是 "auction scale + 三方优化"）。时长控制在 90 秒以内。
+    </div>
+  </div>
+</div>
+
+<!-- ⑥ Focus 重点 vs 轻描淡写 -->
+<div class="card">
+  <div class="card-header amazon-orange">⑥ 什么要 FOCUS，什么要轻描淡写</div>
+  <div class="card-body">
+    <div class="section-label" style="margin-bottom:10px">重点展示（每个能花 10 分钟的话题）</div>
+    <div class="focus-pills">
+      <span class="pill primary">CVR overestimation 诊断 + 特征工程</span>
+      <span class="pill primary">ROAS bidding 系统设计 + 自定义 loss</span>
+      <span class="pill primary">Strategy 7 事故 deep dive</span>
+      <span class="pill secondary">多目标优化框架（advertiser vs user vs platform）</span>
+      <span class="pill secondary">信用卡审批特征工程 (165 features, ablation)</span>
+      <span class="pill tertiary">PhD 研究方法论（不是具体论文，是科学思维）</span>
+    </div>
+
+    <div class="section-label" style="margin-top:16px; margin-bottom:10px">点到为止（一句话带过）</div>
+    <div class="focus-pills">
+      <span class="pill muted">Capital One Manager 角色（展示 ownership，不展示管理）</span>
+      <span class="pill muted">DeadlineRadar / Claude Code 分析（可聊但不是主线）</span>
+      <span class="pill muted">GenAI / LLM 工作（除非被问到 AI 方向）</span>
+      <span class="pill muted">论文具体内容（地震学，面试官不懂，说 "applied DL at scale" 即可）</span>
+      <span class="pill muted">CFA 证书（不相关）</span>
+    </div>
+
+    <div class="do-dont" style="margin-top:16px">
+      <div class="do-box">
+        <h4>✅ 要说的话</h4>
+        <ul>
+          <li>"The core challenge is <strong>multi-objective</strong> — we can't optimize advertiser ROAS without thinking about user experience and platform revenue simultaneously."</li>
+          <li>"I think in terms of <strong>constrained optimization</strong> problems — what's the objective, what are the constraints, and how do we find operating points that satisfy all stakeholders."</li>
+          <li>"In ads, <strong>data freshness and feedback delay</strong> are critical — conversion signals arrive late, so you have to be thoughtful about label construction."</li>
+          <li>"I always care about <strong>calibration</strong>, not just ranking — an uncalibrated model can look great in offline eval but destroy revenue in production."</li>
+          <li>"I've shipped models in <strong>real-time bidding</strong> environments — I understand the constraints around latency, feature freshness, and model update frequency."</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>❌ 避免说的话</h4>
+        <ul>
+          <li>"I've been managing a team of..." (花太多时间在 management)</li>
+          <li>"我觉得我的 level 可能比 AS-II 高" (level 谈判放 offer 阶段)</li>
+          <li>大量讲 LLM / GenAI（这个组核心是 bidding，不是 LLM）</li>
+          <li>"我在 Capital One 做的事情更 impactful"（暗示当前工作不如之前）</li>
+          <li>讲 UCLA 地震学论文的具体内容（直接说 "ML applications at scale"）</li>
+          <li>"我不太了解 Amazon 的系统，但是..."（展示你对 SP auction 机制有研究）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑦ Leadership Principles -->
+<div class="card">
+  <div class="card-header navy">⑦ Amazon Leadership Principles — 关键 LP 对应故事</div>
+  <div class="card-body">
+    <p style="margin-bottom:16px; font-size:0.9em; color:#555">Amazon 行为面试 100% 围绕 LP。以下是这个职位最可能考的 LP 和你最强对应素材：</p>
+    <div class="lp-grid">
+
+      <div class="lp-card">
+        <div class="lp-name">🔍 Dive Deep</div>
+        <div class="lp-body">
+          <div class="project">Story B：Strategy 7 事故</div>
+          <div class="angle">从 -62% 收入 → Trino 追踪 → config 字段不一致 → systemic fix 提案。这是完美的 Dive Deep：不满足于症状，找到根因，提出系统级解决。</div>
+        </div>
+      </div>
+
+      <div class="lp-card">
+        <div class="lp-name">🚀 Bias for Action</div>
+        <div class="lp-body">
+          <div class="project">CVR 诊断 + 12 变体实验</div>
+          <div class="angle">问题模糊时没有等待，立刻跑 EDA，设计 12 个假设并行验证。"I didn't wait for perfect information — I designed experiments to reduce uncertainty fast."</div>
+        </div>
+      </div>
+
+      <div class="lp-card">
+        <div class="lp-name">💡 Invent and Simplify</div>
+        <div class="lp-body">
+          <div class="project">Lightning Rod 转化类型标准化</div>
+          <div class="angle">不是 patch 已有 feature，而是设计了一个跨广告主的统一分类体系，解决了根本上的 label inconsistency。Simplify 体现在：把异构事件映射为有限类别。</div>
+        </div>
+      </div>
+
+      <div class="lp-card">
+        <div class="lp-name">📊 Are Right, A Lot</div>
+        <div class="lp-body">
+          <div class="project">信用卡审批：Age feature 反直觉</div>
+          <div class="angle">"Conventionally age predicts credit behavior. But the data showed removing it improved accuracy by 0.30pp. I trusted the ablation over my prior — and that's what good data science looks like."</div>
+        </div>
+      </div>
+
+      <div class="lp-card">
+        <div class="lp-name">🎯 Customer Obsession</div>
+        <div class="lp-body">
+          <div class="project">CVR 高估 → 广告主 CPA 膨胀</div>
+          <div class="angle">把"广告主多花了钱没效果"定性为 customer pain，不是工程问题。"Advertisers were burning budget in the learning phase — that's a trust problem, not just a metric problem."</div>
+        </div>
+      </div>
+
+      <div class="lp-card">
+        <div class="lp-name">🏗️ Ownership</div>
+        <div class="lp-body">
+          <div class="project">Capital One GenAI 端到端交付</div>
+          <div class="angle">从 0→1，8 个月，从 science design 到 VP 汇报到 production 部署，自己全拿。"I treated it as my product, not my project."</div>
+        </div>
+      </div>
+
+      <div class="lp-card">
+        <div class="lp-name">📈 Deliver Results</div>
+        <div class="lp-body">
+          <div class="project">任何有数字的故事</div>
+          <div class="angle">Amazon 最终看 impact。每个故事结尾要有可量化的结论：58% campaigns、-62% revenue、$20M impact、2 months → 5 min。没有数字就说 "directional improvement of X%"。</div>
+        </div>
+      </div>
+
+      <div class="lp-card">
+        <div class="lp-name">📚 Learn and Be Curious</div>
+        <div class="lp-body">
+          <div class="project">Claude Code 架构分析 / 从 Capital One 到 AdTech 转型</div>
+          <div class="angle">说明你主动学习 ads domain，研究 auction theory，不是被动等 onboarding。"I spent time studying Vickrey auction mechanics and how first/second-price dynamics affect bidding strategy."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ⑧ 技术面 重点 -->
+<div class="card">
+  <div class="card-header blue">⑧ 技术面 — 最可能考的方向 &amp; 准备策略</div>
+  <div class="card-body">
+
+    <div class="storyline">
+      <div class="story-title">ML System Design（最重要，必考）</div>
+      <div class="story-body">
+        <p><strong>典型题：</strong>"Design a CTR/CVR prediction system for sponsored search at Amazon scale."</p>
+        <div class="evidence">
+          <strong>答题框架：</strong>
+          <ul>
+            <li><strong>Problem framing：</strong>定义 objective（点击率？转化率？ROAS？），明确 constraint（latency &lt;10ms，real-time serving）</li>
+            <li><strong>Data：</strong>Features（query, product, advertiser, user context, historical CTR），label construction（delayed feedback 怎么处理），data freshness</li>
+            <li><strong>Model：</strong>Two-tower / DSSM for retrieval，GBDT/DNN for ranking，calibration layer</li>
+            <li><strong>Multi-objective：</strong>如何 balance CTR vs 广告主 bid vs relevance（Pareto frontier，Lagrangian relaxation）</li>
+            <li><strong>Serving：</strong>Online serving latency，feature store，model update frequency</li>
+            <li><strong>Evaluation：</strong>Offline (AUC, calibration) vs online (A/B test，revenue, RPM)</li>
+          </ul>
+        </div>
+        <div class="hook">你的加分：ROKT 真实 RTB 经验，可以说"在 ROKT 我们面临类似的问题，我们的解法是..."</div>
+      </div>
+    </div>
+
+    <div class="storyline">
+      <div class="story-title">Auction Theory &amp; Bidding（必须懂基本概念）</div>
+      <div class="story-body">
+        <div class="evidence">
+          <strong>必知概念：</strong>
+          <ul>
+            <li><strong>Second-price auction (GSP)：</strong>Amazon SP 的基础机制，赢家付第二名出价</li>
+            <li><strong>Quality Score：</strong>Amazon 的 ad rank = bid × predicted CTR × relevance score</li>
+            <li><strong>eCPM (effective CPM)：</strong>如何比较不同出价格式（CPC, CPM, ROAS）</li>
+            <li><strong>Budget pacing：</strong>日预算如何平滑分配，避免 early exhaustion</li>
+            <li><strong>Bid landscape：</strong>如何估计赢得某次竞拍需要的最低出价</li>
+          </ul>
+        </div>
+        <div class="hook">你的加分：ROKT Strategy 7 事故直接展示你对 quality score 机制的深度理解</div>
+      </div>
+    </div>
+
+    <div class="storyline">
+      <div class="story-title">Coding（不用完美，但要干净）</div>
+      <div class="story-body">
+        <p>Amazon AS-II coding bar：LeetCode medium。重点考数据结构和算法清晰度，不是 hard DP。</p>
+        <div class="evidence">
+          <strong>高频题型：</strong>
+          <ul>
+            <li>Hash map / two-pointer（频率统计，sliding window）</li>
+            <li>Binary search（bid threshold，operating point search）</li>
+            <li>Tree traversal（广告类目层级）</li>
+            <li>偶尔：基础 graph（广告主-商品关系）</li>
+          </ul>
+        </div>
+        <div class="hook">Python 优先。写之前先说思路，写完说 time/space complexity，问"要不要 handle edge cases？"</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑨ 你要问的问题 -->
+<div class="card">
+  <div class="card-header teal">⑨ 你应该问面试官的问题（展示你在认真思考这个组）</div>
+  <div class="card-body">
+    <div class="storyline">
+      <div class="story-title">关于团队和工作</div>
+      <div class="story-body">
+        <ul style="padding-left:16px; font-size:0.9em;">
+          <li style="margin-bottom:6px">"The JD mentions Search Ranking &amp; Interleaving — can you tell me more about what the team's current top science challenges are?"</li>
+          <li style="margin-bottom:6px">"How does the team balance running production experiments versus longer-horizon research projects?"</li>
+          <li style="margin-bottom:6px">"What does the model update cycle look like — are you doing online learning, periodic retraining, or something else?"</li>
+          <li style="margin-bottom:6px">"How do you think about the tradeoff between advertiser ROAS goals and shopper relevance on the search page?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict warn">
+      <strong>⚠️ 不要问</strong>"What is the growth opportunity?" / "When will I get promoted?" — 这是 L5 面试，不是 L6 谈判。
+    </div>
+  </div>
+</div>
+
+<!-- ⑩ 弱点预案 -->
+<div class="card">
+  <div class="card-header navy">⑩ 潜在弱点 &amp; 预设回答</div>
+  <div class="card-body">
+    <div class="verdict warn">
+      <strong>⚠️ 可能的质疑：你没有 Amazon / e-commerce 广告经验</strong><br>
+      回答：<em>"I haven't worked inside Amazon's systems specifically, but I've been working in real-time bidding at Rokt — the underlying auction mechanics, CVR modeling, and multi-objective optimization challenges are directly transferable. I've also spent time studying how SP's quality score and ad rank work, so I'm not starting from zero on the domain."</em>
+    </div>
+    <div class="verdict warn">
+      <strong>⚠️ 可能的质疑：你的 deep learning 经验不够 deep（多数工作用 LightGBM）</strong><br>
+      回答：<em>"My current work has been heavily tree-based because that's what performs best in our feature regime with sparse, high-cardinality categorical features. But I've worked with neural architectures in other contexts — ASR Conformer at Capital One (75M calls/yr), GNNs and Transformers in my PhD, and two-tower architectures conceptually. I'm very comfortable choosing the right tool for the problem rather than defaulting to deep learning."</em>
+    </div>
+    <div class="verdict warn">
+      <strong>⚠️ 可能的质疑：你的 ROKT 经验才 5 个月，还太新</strong><br>
+      回答：<em>"Five months is short in tenure, but I've had very high velocity — I shipped the ROAS value prediction model, ran a 12-variant feature experiment, and did a full audit of the learning-phase CVR issue. The volume of impactful work matters more to me than calendar time."</em>
+    </div>
+  </div>
+</div>
+
+<footer style="text-align:center; color:#999; font-size:0.8em; padding:30px 0;">
+  Generated April 2026 · Amazon AS-II SP&B · Job ID 3154707 · For Tian Feng's interview prep
+</footer>
+
+</div>
+</body>
+</html>

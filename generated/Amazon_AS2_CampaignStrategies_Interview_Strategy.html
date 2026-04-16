@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon AS-II · Campaign Strategies · 面试策略 — Tian Feng</title>
+<style>
+:root {
+  --amazon: #FF9900;
+  --navy: #131921;
+  --blue: #1a5276;
+  --teal: #0e6655;
+  --purple: #6a1b9a;
+  --red: #c0392b;
+  --green: #1e8449;
+  --orange2: #e65100;
+  --border: #dee2e6;
+  --light: #f8f9fa;
+  --warn-bg: #fff8e1;
+  --good-bg: #e8f5e9;
+  --bad-bg: #fce4ec;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a1a; background: #f0f2f5; line-height: 1.65; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 24px 16px 80px; }
+
+.page-header { background: linear-gradient(135deg, var(--navy) 0%, #1a2a4a 100%); color: #fff; border-radius: 10px; padding: 32px 40px; margin-bottom: 8px; }
+.page-header h1 { font-size: 1.65em; font-weight: 700; }
+.page-header h1 span { color: var(--amazon); }
+.page-header .sub { margin-top: 6px; opacity: 0.75; font-size: 0.9em; }
+.page-header .meta { margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+.meta-item { background: rgba(255,255,255,0.12); padding: 4px 14px; border-radius: 20px; font-size: 0.83em; }
+.meta-item.warn { background: rgba(255,153,0,0.3); color: var(--amazon); font-weight: 700; }
+
+.alert { border-radius: 8px; padding: 14px 20px; margin-bottom: 20px; font-size: 0.9em; }
+.alert.changed { background: #fff3e0; border-left: 4px solid var(--amazon); }
+.alert.changed strong { color: var(--orange2); }
+
+.card { background: #fff; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+.ch { padding: 13px 24px; font-weight: 700; font-size: 0.97em; display: flex; align-items: center; gap: 8px; }
+.ch.orange { background: var(--amazon); color: #fff; }
+.ch.navy { background: var(--navy); color: #fff; }
+.ch.blue { background: var(--blue); color: #fff; }
+.ch.teal { background: var(--teal); color: #fff; }
+.ch.purple { background: var(--purple); color: #fff; }
+.ch.green { background: #2e7d32; color: #fff; }
+.cb { padding: 20px 24px; }
+
+.verdict { border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; }
+.verdict.good { background: var(--good-bg); border-left: 4px solid var(--green); }
+.verdict.warn { background: var(--warn-bg); border-left: 4px solid #f9a825; }
+.verdict.bad { background: var(--bad-bg); border-left: 4px solid var(--red); }
+.verdict strong { display: block; margin-bottom: 3px; }
+
+/* Three-layer stack */
+.stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+.stack-layer { border-radius: 8px; padding: 16px 18px; text-align: center; }
+.stack-layer.l1 { background: #e8eaf6; border: 2px solid #5c6bc0; }
+.stack-layer.l2 { background: #e0f2f1; border: 2px solid #26a69a; }
+.stack-layer.l3 { background: #fff3e0; border: 2px solid var(--amazon); }
+.stack-layer h4 { font-size: 0.9em; margin-bottom: 6px; }
+.stack-layer.l1 h4 { color: #3949ab; }
+.stack-layer.l2 h4 { color: #00796b; }
+.stack-layer.l3 h4 { color: var(--orange2); }
+.stack-layer p { font-size: 0.8em; color: #555; line-height: 1.5; }
+.stack-layer .label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+
+/* Story blocks */
+.story { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+.story-head { padding: 10px 18px; font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 0.93em; }
+.story-head.s1 { background: #e8f5e9; color: #2e7d32; border-bottom: 1px solid #c8e6c9; }
+.story-head.s2 { background: #e8eaf6; color: #3949ab; border-bottom: 1px solid #c5cae9; }
+.story-head.s3 { background: #fff8e1; color: #f57f17; border-bottom: 1px solid #fff176; }
+.story-head.s4 { background: #fce4ec; color: #c62828; border-bottom: 1px solid #f8bbd0; }
+.story-head.s5 { background: #e0f2f1; color: #00695c; border-bottom: 1px solid #b2dfdb; }
+.story-body { padding: 14px 18px; font-size: 0.9em; }
+.story-body p { margin-bottom: 8px; }
+.hook { font-style: italic; color: var(--teal); border-left: 3px solid var(--teal); padding: 8px 12px; margin: 10px 0; background: #f0faf9; border-radius: 0 6px 6px 0; font-size: 0.91em; line-height: 1.6; }
+.nums { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; margin-top: 8px; }
+.nums ul { padding-left: 16px; }
+.nums li { margin-bottom: 3px; font-size: 0.87em; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.tag { padding: 2px 9px; border-radius: 12px; font-size: 0.75em; font-family: monospace; background: #e8f4fd; color: #1a5276; border: 1px solid #bee3f8; }
+.tag.hit { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; font-weight: 700; }
+.tag.gap { background: #fce4ec; color: #c62828; border-color: #f48fb1; }
+
+/* Map table */
+.mt { width: 100%; border-collapse: collapse; font-size: 0.87em; }
+.mt th { background: var(--navy); color: #fff; padding: 9px 14px; text-align: left; }
+.mt td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.mt tr:last-child td { border-bottom: none; }
+.mt tr:nth-child(even) td { background: var(--light); }
+.jd-kw { font-weight: 700; color: var(--blue); }
+.your-proj { color: var(--teal); }
+.angle { font-size: 0.82em; color: #555; margin-top: 3px; }
+
+/* Do/Don't */
+.dd { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+.do-box { background: var(--good-bg); border: 1px solid #a5d6a7; border-radius: 8px; padding: 14px 18px; }
+.dont-box { background: var(--bad-bg); border: 1px solid #f48fb1; border-radius: 8px; padding: 14px 18px; }
+.do-box h4 { color: var(--green); margin-bottom: 8px; font-size: 0.93em; }
+.dont-box h4 { color: var(--red); margin-bottom: 8px; font-size: 0.93em; }
+.do-box li, .dont-box li { margin-bottom: 5px; font-size: 0.88em; }
+ul { list-style: disc; }
+ul.check { list-style: none; }
+ul.check li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+
+/* LP grid */
+.lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; }
+.lp-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.lp-name { background: var(--navy); color: var(--amazon); padding: 8px 14px; font-weight: 700; font-size: 0.87em; }
+.lp-body { padding: 11px 14px; font-size: 0.86em; }
+.lp-proj { font-weight: 600; color: var(--blue); }
+.lp-angle { color: #555; margin-top: 4px; line-height: 1.55; }
+
+/* Opening script */
+.script { background: #0d1b2a; color: #e0e0e0; border-radius: 8px; padding: 22px 26px; margin-bottom: 12px; font-size: 0.9em; line-height: 1.75; }
+.script .ql { color: var(--amazon); font-weight: 700; margin-bottom: 10px; font-size: 0.92em; }
+.script em { color: #80cbc4; font-style: normal; }
+.script strong { color: var(--amazon); }
+
+/* Pill bar */
+.pills { display: flex; flex-wrap: wrap; gap: 7px; margin: 10px 0; }
+.pill { padding: 4px 13px; border-radius: 16px; font-size: 0.82em; font-weight: 600; }
+.p-primary { background: var(--amazon); color: #fff; }
+.p-blue { background: var(--blue); color: #fff; }
+.p-teal { background: var(--teal); color: #fff; }
+.p-muted { background: #e9ecef; color: #555; }
+.p-gap { background: #fce4ec; color: var(--red); border: 1px solid #f48fb1; }
+
+/* Gap fix section */
+.gap-row { display: grid; grid-template-columns: 1fr 2fr; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+.gap-label { background: #fce4ec; padding: 14px 16px; font-weight: 700; color: var(--red); font-size: 0.88em; border-right: 1px solid var(--border); display: flex; align-items: center; }
+.gap-fix { padding: 14px 16px; font-size: 0.88em; line-height: 1.6; }
+.gap-fix .bridge { color: var(--teal); font-style: italic; }
+
+/* Quote */
+.quote { background: #e8f4fd; border-left: 4px solid var(--blue); padding: 12px 18px; border-radius: 0 8px 8px 0; font-style: italic; margin: 12px 0; font-size: 0.92em; color: #1a3a5c; }
+
+@media (max-width:620px) {
+  .dd { grid-template-columns: 1fr; }
+  .stack { grid-template-columns: 1fr; }
+  .gap-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="page-header">
+  <h1>Amazon <span>Applied Scientist II</span> · Campaign Strategies · Agentic AI</h1>
+  <div class="sub">面试策略手册 · Tian Feng · April 2026 · 完全重写版（Job ID: 3188931）</div>
+  <div class="meta">
+    <span class="meta-item">🏢 NYC $172K–$223K / SEA $142K–$193K</span>
+    <span class="meta-item">👥 Campaign Strategies Team · 1.6M advertisers</span>
+    <span class="meta-item warn">⚠️ Previous strategy (3154707) was WRONG ROLE</span>
+  </div>
+</div>
+
+<div class="alert changed">
+  <strong>⚠️ 重大策略调整：</strong>原来准备的是 Search R&amp;I 竞价 ML 岗（3154707）——完全不同的方向。本岗位（3188931）的核心是 <strong>LLM Agent 系统 + 广告主 AI 助手</strong>。Capital One GenAI 经历从辅助变成主角；ROKT 竞价经历退居辅助。
+</div>
+
+<!-- ① 这个岗位真正在做什么 -->
+<div class="card">
+  <div class="ch orange">① 这个岗位真正在做什么 — 读懂 Campaign Strategies Team</div>
+  <div class="cb">
+    <p style="margin-bottom:14px">一句话：<strong>给 1.6 百万 Amazon 广告主建一个 AI 助手</strong>，能理解他们的需求，主动给出竞价建议、关键词推荐、活动优化方案，既能对话，也能静默执行。</p>
+
+    <div class="stack">
+      <div class="stack-layer l1">
+        <div class="label">Foundation</div>
+        <h4>Base Model + Alignment</h4>
+        <p>Fine-tuning (SFT)<br>DPO / IPO<br>Preference optimization<br><em>让模型"懂广告"</em></p>
+      </div>
+      <div class="stack-layer l2">
+        <div class="label">Capability</div>
+        <h4>Tool + Memory + Retrieval</h4>
+        <p>MCP tool curation<br>Auction simulation<br>ML model calls<br><em>给模型"手和眼"</em></p>
+      </div>
+      <div class="stack-layer l3">
+        <div class="label">Orchestration 🔥</div>
+        <h4>Agent Architecture</h4>
+        <p>CoT / ToT / ReAct<br>Multi-agent workflows<br>Safety + Eval<br><em>让系统"会规划"</em></p>
+      </div>
+    </div>
+
+    <div class="verdict good">
+      <strong>✅ 你的 Capital One 经历恰好覆盖了所有三层</strong>
+      SFT + fine-tuning（chatbot）→ RAG + tool calling + MCP（hackathon）→ ReACT + multi-agent + Reflexion（end-to-end system）。这是你最强的故事主线。
+    </div>
+    <div class="verdict warn">
+      <strong>⚠️ 唯一明显的 gap：DPO / IPO / preference optimization 动手经验</strong>
+      你在 Capital One 有 SFT、fine-tuning，但没有明确的 RLHF / DPO 实战。后面有专门的应对策略。
+    </div>
+  </div>
+</div>
+
+<!-- ② 人设 -->
+<div class="card">
+  <div class="ch navy">② 你的人设 — 一句话定位（为这个 JD 重写）</div>
+  <div class="cb">
+    <div class="quote">
+      "I'm an applied scientist who has shipped production LLM agent systems end-to-end — from architecture design and fine-tuning through evaluation, safety guardrails, and deployment. I understand how to align model behavior for domain-specific tasks, build multi-agent orchestration with tool use, and scale AI guidance to real users. My work has driven measurable business impact at Capital One, and I'm excited to apply the same approach to Amazon's advertiser platform."
+    </div>
+
+    <p style="margin-bottom: 12px; font-size: 0.9em;">这个人设的核心是<strong>三个关键词</strong>：</p>
+    <div class="pills">
+      <span class="pill p-primary">End-to-end LLM agent delivery</span>
+      <span class="pill p-blue">Multi-agent + tool orchestration (MCP)</span>
+      <span class="pill p-teal">Eval + safety at production scale</span>
+    </div>
+
+    <div style="margin-top: 16px;">
+      <p style="font-size: 0.88em; color: #555; margin-bottom: 8px;"><strong>为什么这个人设对这个 JD 有效：</strong></p>
+      <ul style="padding-left: 18px; font-size: 0.88em;">
+        <li style="margin-bottom: 5px;">JD 要"design and build agents" → 你在 Capital One 独立设计并上线了完整系统</li>
+        <li style="margin-bottom: 5px;">JD 要"MCP tool curation" → 你在黑客马拉松里明确用了 MCP，这是罕见的直接经验</li>
+        <li style="margin-bottom: 5px;">JD 要"evaluation pipelines + safety" → 你建了 Reflexion 自修正框架（幻觉 -30%）+ 自动化测试</li>
+        <li style="margin-bottom: 5px;">JD 要"conversational + non-conversational" → Capital One chatbot（对话）+ ROKT LLM 活动监控（非对话）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ③ 五大核心故事 -->
+<div class="card">
+  <div class="ch blue">③ 五大核心故事 — Capital One 全面顶位，ROKT 辅助</div>
+  <div class="cb">
+
+    <div class="story">
+      <div class="story-head s1">⭐ Story A（主力）：Capital One 对话 AI 系统 — ReACT + RAG + Tool Calling</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>"Design agents for conversational experience" / Tell me about an agent system you built / 技术深度问题</p>
+        <div class="hook">
+          "I was tech lead for Capital One's first LLM-powered customer service chatbot. I designed the full agent architecture: ReACT for reasoning and action, RAG for grounding responses in policy documents, tool calling for live account data, and query rewriting to handle vague user inputs. The key challenge was making the agent reliable enough for production — it needed to know what it didn't know, and gracefully escalate rather than hallucinate."
+        </div>
+        <div class="tag-row">
+          <span class="tag hit">ReACT</span><span class="tag hit">RAG</span><span class="tag hit">tool calling</span>
+          <span class="tag hit">conversational agent</span><span class="tag hit">fine-tuning</span>
+        </div>
+        <p style="margin-top:10px"><strong>面试官想听的角度：</strong>你怎么设计 agent 的决策循环，怎么 handle 失败/兜底，怎么测试多步推理的正确性。</p>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="story-head s2">⭐ Story B（主力）：Capital One 黑客马拉松 — MCP + Multi-Agent（第一名，21支队伍）</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>"Multi-agent orchestration" / MCP 相关问题 / Invent &amp; Simplify</p>
+        <div class="hook">
+          "I architected a multi-agent system that simulated account takeover attacks for fraud prevention. The novel part was using Model Context Protocol (MCP) for scalable agent coordination — each agent had its own tool set and memory, coordinated through a central orchestrator. We used reinforcement learning to have the attack agents learn more sophisticated strategies over time. Won first place out of 21 teams."
+        </div>
+        <div class="tag-row">
+          <span class="tag hit">MCP</span><span class="tag hit">multi-agent orchestration</span>
+          <span class="tag hit">reinforcement learning</span><span class="tag hit">agent coordination</span>
+        </div>
+        <p style="margin-top:10px"><strong>面试官想听的角度：</strong>MCP 的具体用法，agent 间通信的设计，RL 如何应用于 agent 行为优化。</p>
+        <div class="nums">
+          <strong>可以拓展说的细节：</strong>
+          <ul>
+            <li>为什么选 MCP 而不是直接函数调用？（扩展性、工具标准化）</li>
+            <li>orchestrator 如何决定派哪个 agent 做哪个任务？</li>
+            <li>RL 的 reward signal 如何定义？</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="story-head s3">⭐ Story C（主力）：Capital One GenAI 生产系统 $20M — End-to-End Ownership</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>Ownership / Deliver Results / "bring innovations into production"</p>
+        <div class="hook">
+          "I delivered Capital One's first production GenAI application — an LLM system that automated risk event root cause analysis for 100+ risk managers, cutting analysis time from 2 months to 5 minutes. The challenge wasn't just building the model; it was building evaluation infrastructure, getting alignment on safety requirements, and managing stakeholders from risk managers to VPs. It expanded to 7 use cases. This taught me that shipping AI means owning the full lifecycle — not just the model."
+        </div>
+        <div class="nums">
+          <strong>关键数字：</strong>
+          <ul>
+            <li>2 months → 5 minutes analysis time</li>
+            <li>100+ risk managers</li>
+            <li>7 use cases under unified architecture</li>
+            <li>$10M+ investment decisions influenced via exec presentation</li>
+            <li>$20M total measured impact</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="story-head s4">⭐ Story D（主力）：Capital One Reflexion + Eval Framework — Safety &amp; Reliability</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>"Evaluation pipelines / safety guardrails / automated benchmarks"</p>
+        <div class="hook">
+          "One of my biggest contributions was the evaluation infrastructure. I implemented the Reflexion framework — the model reviews its own output and iterates — reducing hallucination rate by 30%. I built automated test suites, A/B frameworks, and continuous monitoring. I also integrated a user feedback loop into the UI so the model could learn from real-world errors. For safety, we defined guardrails that triggered escalation for sensitive content categories."
+        </div>
+        <div class="tag-row">
+          <span class="tag hit">Reflexion</span><span class="tag hit">eval pipeline</span>
+          <span class="tag hit">safety guardrails</span><span class="tag hit">hallucination -30%</span>
+          <span class="tag hit">A/B testing</span>
+        </div>
+        <p style="margin-top:10px"><strong>面试官想听的角度：</strong>如何定义 agent 的 evaluation metric（不只是 accuracy），如何 test multi-step reasoning，如何 handle safety at scale。</p>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="story-head s5">Story E（辅助）：ROKT LLM Campaign Agent — Non-Conversational Advertiser Guidance</div>
+      <div class="story-body">
+        <p><strong>用于：</strong>说明你理解广告主 guidance 的 non-conversational 形式</p>
+        <div class="hook">
+          "At Rokt, I built an LLM-based agent for campaign monitoring and bid recommendations — not a chat interface, but a proactive system that analyzed campaign signals and surfaced actionable insights with safety constraints. This is actually the harder UX: the agent has to decide when and what to communicate without being prompted. It's directly analogous to what Campaign Strategies is building for Amazon advertisers."
+        </div>
+        <div class="tag-row">
+          <span class="tag hit">non-conversational agent</span><span class="tag hit">advertiser guidance</span>
+          <span class="tag hit">safety constraints</span><span class="tag">proactive AI</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ④ JD关键词对照 -->
+<div class="card">
+  <div class="ch teal">④ JD 关键词 → 你的项目 对照表（含 45%→更高 提升路径）</div>
+  <div class="cb" style="padding:0;">
+    <table class="mt">
+      <thead>
+        <tr><th style="width:25%">JD 关键词</th><th style="width:30%">你的对应经历</th><th style="width:45%">怎么说 / 注意事项</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="jd-kw">Agentic architectures (CoT, ToT, ReAct)</span></td>
+          <td><span class="your-proj">Capital One chatbot (ReACT) + GenAI end-to-end</span></td>
+          <td><div class="angle">直接命中。说清楚 ReACT 的具体实现：Thought → Action → Observation 循环，工具选择逻辑，失败处理。ToT 可以说你了解研究但未生产化。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-kw">Multi-agent orchestration</span></td>
+          <td><span class="your-proj">Capital One hackathon (MCP) + ROKT experimentation platform</span></td>
+          <td><div class="angle">这是你的杀手锏之一——MCP 直接命中 JD 的"Curate datasets and tools for MCP"。很多候选人没有真实 MCP 经验。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-kw">Fine-tuning / instruction tuning</span></td>
+          <td><span class="your-proj">Capital One chatbot fine-tuning + ASR Conformer (production)</span></td>
+          <td><div class="angle">有经验，但要说清楚：做了什么样的 SFT，数据怎么构建，如何评估 fine-tuned model vs base model。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-kw">DPO / IPO / preference optimization <span style="color:var(--red)">⚠️ gap</span></span></td>
+          <td><span class="your-proj">无直接经验（最大 gap）</span></td>
+          <td><div class="angle">应对策略见下方"Gap 应对"。核心：用"我理解机制，能快速上手"的框架，并结合 Reflexion（迭代偏好修正）类比。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-kw">Evaluation pipelines + safety guardrails</span></td>
+          <td><span class="your-proj">Capital One Reflexion + eval infra + user feedback loop</span></td>
+          <td><div class="angle">直接命中。重点说：如何定义 agent eval（不只是单步），multi-step reasoning test，safety trigger 的设计。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-kw">MCP tool curation</span></td>
+          <td><span class="your-proj">Capital One hackathon (MCP) + DeadlineRadar</span></td>
+          <td><div class="angle">这是超稀缺经验，主动提起，大多数人根本没碰过 MCP。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-kw">Advertiser guidance at scale (1.6M)</span></td>
+          <td><span class="your-proj">ROKT LLM agent + Capital One 100+ users + 75M ASR calls</span></td>
+          <td><div class="angle">说明你理解 scale 带来的挑战：personalization vs consistency，latency，error amplification。不是只为一个用户设计。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-kw">RL for agent behavior optimization</span></td>
+          <td><span class="your-proj">Capital One hackathon (RL for attack agents)</span></td>
+          <td><div class="angle">有，但不是核心经验。说"我在 hackathon 中用过，更深入的 RL 比如 PPO/GRPO 我在研究中了解原理"。</div></td>
+        </tr>
+        <tr>
+          <td><span class="jd-kw">Long-horizon reasoning / planning</span></td>
+          <td><span class="your-proj">ROKT AI experimentation platform（自动化多步流程）</span></td>
+          <td><div class="angle">ROKT 的实验平台：data discovery → SQL → design → eval → deploy 是 multi-step，可以类比 long-horizon planning。</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ⑤ Gap 应对：DPO -->
+<div class="card">
+  <div class="ch purple">⑤ 最大 Gap 应对 — DPO / Preference Optimization</div>
+  <div class="cb">
+    <div class="verdict bad">
+      <strong>❌ 不要说的版本</strong>
+      "我没有做过 DPO，这块我需要学习。" ← 真实但致命，让面试官打了 no-hire。
+    </div>
+    <div class="verdict good">
+      <strong>✅ 正确的应对框架（3步）</strong>
+    </div>
+
+    <p style="margin-bottom:12px; font-size:0.9em;"><strong>Step 1：展示你理解原理</strong></p>
+    <div class="gap-row">
+      <div class="gap-label">DPO 原理</div>
+      <div class="gap-fix">DPO 把 RLHF 的三步（SFT → reward model → PPO）压缩成一步对比学习：给定 (prompt, chosen, rejected) 三元组，直接优化 policy 让 chosen 概率 > rejected 概率，避免了不稳定的 reward model 训练。关键参数 β 控制 KL divergence 约束强度。
+        <br><span class="bridge">你可以说："我理解 DPO 相比 PPO 的优势在于训练稳定性和数据效率——不需要训 reward model，对 preference pair 数据直接优化。"</span>
+      </div>
+    </div>
+
+    <p style="margin-bottom:12px; margin-top:4px; font-size:0.9em;"><strong>Step 2：用 Reflexion 类比（你真实做过的）</strong></p>
+    <div class="gap-row">
+      <div class="gap-label">桥接说法</div>
+      <div class="gap-fix">
+        <span class="bridge">"In my production work, I implemented Reflexion — which is conceptually related: the model generates a response, evaluates it against criteria, and produces an improved version. This is a form of preference-driven self-correction. The next natural step is formalizing this into offline preference data and fine-tuning with DPO."</span>
+        <br><br>这句话的逻辑：Reflexion = 在线偏好修正 → DPO = 离线偏好学习，是同一个思想的不同实现。面试官会认可这个类比。
+      </div>
+    </div>
+
+    <p style="margin-bottom:12px; margin-top:4px; font-size:0.9em;"><strong>Step 3：说明你的学习速度</strong></p>
+    <div class="gap-row">
+      <div class="gap-label">快速上手</div>
+      <div class="gap-fix">
+        <span class="bridge">"I've studied the DPO paper and I'm familiar with implementations like TRL. My plan is to run a small preference optimization experiment on an open-source model in the next week to get hands-on. Given my SFT experience and understanding of the training pipeline, I expect the ramp-up to be fast."</span>
+        <br><br>说这话之前，真的去跑一遍！即使是一个 toy experiment，你就可以说"上周我跑了一个..."。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑥ 开场白 -->
+<div class="card">
+  <div class="ch orange">⑥ "Tell me about yourself" — 专为 3188931 版</div>
+  <div class="cb">
+    <div class="script">
+      <div class="ql">Q: Walk me through your background.</div>
+      "I'm an applied scientist with a PhD from UCLA and four years of industry experience focused on <em>building LLM agent systems</em> from research through production.<br><br>
+
+      Most recently at <strong>Capital One</strong>, I led the delivery of the company's first production GenAI system in the Risk domain — an LLM agent that reduced a 2-month root cause analysis process to 5 minutes for over 100 risk managers. But the part most relevant to this role is the broader system work: I designed the agent architecture with <em>ReACT reasoning, RAG, and tool calling</em>, built the evaluation infrastructure including a <em>Reflexion-based self-correction loop</em> that cut hallucinations by 30%, and implemented safety guardrails for production deployment. We also won the internal AI hackathon by building a <em>multi-agent system using MCP</em> for agent coordination.<br><br>
+
+      Currently at <strong>Rokt</strong>, I'm on the ads bidding team, where I've been building <em>LLM-based campaign monitoring agents</em> that proactively surface optimization recommendations — a non-conversational form of the same guidance problem your team is solving for advertisers.<br><br>
+
+      What draws me to this role is the Campaign Strategies team's vision: a <em>personalized, context-aware agentic system for 1.6 million advertisers</em>. That's the exact intersection of agent architecture, preference alignment, and scale that I find most interesting — and where I believe I can contribute immediately."
+    </div>
+    <div class="verdict good" style="margin-top: 0;">
+      <strong>✅ 这个开场的设计逻辑</strong>
+      PhD + production → Capital One 三件事（agent system + eval/safety + MCP hackathon）→ ROKT 衔接广告场景 → 为什么 Amazon Campaign Strategies 吸引你（非泛泛，是"1.6M + agentic + alignment"）。控制在 90 秒。
+    </div>
+  </div>
+</div>
+
+<!-- ⑦ 重点 vs 轻描淡写 -->
+<div class="card">
+  <div class="ch blue">⑦ 什么要 FOCUS，什么要轻描淡写</div>
+  <div class="cb">
+    <p style="font-size:0.85em; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">主角（每个话题可以展开 10 分钟）</p>
+    <div class="pills">
+      <span class="pill p-primary">Capital One chatbot: ReACT + RAG + tool calling</span>
+      <span class="pill p-primary">Capital One hackathon: MCP + multi-agent</span>
+      <span class="pill p-primary">Capital One eval + Reflexion + safety guardrails</span>
+      <span class="pill p-blue">GenAI $20M end-to-end ownership</span>
+      <span class="pill p-blue">ROKT LLM campaign monitoring agent</span>
+    </div>
+
+    <p style="font-size:0.85em; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; margin-top:16px;">辅助（1–2 句话带过）</p>
+    <div class="pills">
+      <span class="pill p-muted">ROKT 竞价 ML（CVR、ROAS）— 辅证你懂广告生态，不是主线</span>
+      <span class="pill p-muted">Capital One Manager 角色 — 说明 ownership，不讲管理</span>
+      <span class="pill p-muted">PhD 地震学论文 — "applied DL at scale" 一句带过</span>
+      <span class="pill p-muted">CFA — 不提</span>
+    </div>
+
+    <div class="dd" style="margin-top: 16px;">
+      <div class="do-box">
+        <h4>✅ 要在面试中说的话</h4>
+        <ul>
+          <li>"The hardest part of building agents isn't the model — it's <strong>evaluation and trust</strong>. How do you know the agent is doing the right thing across thousands of diverse advertiser scenarios?"</li>
+          <li>"I think of <strong>preference optimization as closing the feedback loop</strong>: you observe where the agent fails or suboptimally responds, collect those signals, and use DPO to steer the model."</li>
+          <li>"In production, the agent needs to know <strong>when to act vs when to ask</strong>. That's a harder design problem than getting the average case right."</li>
+          <li>"MCP gives you a standardized way to expose tools to agents — the benefit isn't just convenience, it's that you can <strong>swap tools without retraining</strong> the model."</li>
+          <li>"At 1.6M advertiser scale, <strong>personalization and consistency are in tension</strong> — a one-size-fits-all agent won't work, but fully custom behavior is untrustworthy."</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>❌ 避免说</h4>
+        <ul>
+          <li>大篇幅讲 CVR 高估、Strategy 7 事故（竞价问题，这个组不关心）</li>
+          <li>"Prompt engineering 就够了" — 这是 JD 里明确反对的观点</li>
+          <li>"DPO 我没做过" 直接承认 gap 不给 bridge</li>
+          <li>讲太多 Capital One 的金融/风控业务背景 — 他们要的是 技术方法，不是金融知识</li>
+          <li>"我觉得 LLM 不需要 fine-tuning" — 这个 JD 明确要求 fine-tuning，这句话是 red flag</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑧ Amazon LP -->
+<div class="card">
+  <div class="ch navy">⑧ Leadership Principles — 这个 JD 特有的 LP 优先级</div>
+  <div class="cb">
+    <div class="lp-grid">
+      <div class="lp-card">
+        <div class="lp-name">💡 Invent and Simplify（最重要）</div>
+        <div class="lp-body">
+          <div class="lp-proj">Capital One hackathon: MCP multi-agent + RL</div>
+          <div class="lp-angle">这是 pioneer 岗。JD 第一句就是"help pioneer the next generation of agentic AI"。你的 MCP hackathon 是真实的从 0 创新——用了当时很新的协议解决 agent 协调问题。</div>
+        </div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-name">🔍 Dive Deep</div>
+        <div class="lp-body">
+          <div class="lp-proj">Reflexion: 幻觉从哪来 → 如何系统性修复</div>
+          <div class="lp-angle">"I didn't accept 'the model sometimes hallucinates' as an answer — I analyzed which response types hallucinated most, and designed Reflexion to target those specifically."</div>
+        </div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-name">🎯 Customer Obsession</div>
+        <div class="lp-body">
+          <div class="lp-proj">1.6M advertisers → personalized guidance</div>
+          <div class="lp-angle">"For 1.6 million advertisers with wildly different goals and sophistication levels, 'good average performance' isn't good enough — the guidance needs to meet each advertiser where they are."</div>
+        </div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-name">🏗️ Ownership</div>
+        <div class="lp-body">
+          <div class="lp-proj">Capital One $20M end-to-end</div>
+          <div class="lp-angle">从 0→1，8 个月，science + engineering + stakeholder management + production。全拿。"I treated it as my product, not my project."</div>
+        </div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-name">📚 Learn and Be Curious</div>
+        <div class="lp-body">
+          <div class="lp-proj">Claude Code 架构分析 + DPO 主动学习</div>
+          <div class="lp-angle">说明你在主动研究最新的 agent framework（Claude Code 内核），以及你在 ramp up DPO。"I don't wait to be assigned training — I read papers and run experiments."</div>
+        </div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-name">📈 Deliver Results</div>
+        <div class="lp-body">
+          <div class="lp-proj">每个故事的结尾数字</div>
+          <div class="lp-angle">必须用数字收尾：-30% hallucination, 2mo→5min, $20M, 21 teams / 1st place。没有数字就说方向性结论 + 为什么很难测量。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑨ 技术面 -->
+<div class="card">
+  <div class="ch green">⑨ 技术面准备 — 这个组最可能考的方向</div>
+  <div class="cb">
+    <div class="story">
+      <div class="story-head s1">ML System Design（必考）</div>
+      <div class="story-body">
+        <p><strong>典型题：</strong>"Design an agentic AI system that helps Amazon advertisers optimize their campaigns."</p>
+        <div class="nums">
+          <strong>答题框架（对应 JD 三层架构）：</strong>
+          <ul>
+            <li><strong>Scope：</strong>对话式 vs 非对话式？单步建议 vs 多步执行？先解决哪个 advertiser segment？</li>
+            <li><strong>Foundation：</strong>Base LLM（Amazon Bedrock / 开源 fine-tuned）+ SFT on advertiser domain data + DPO from preference pairs</li>
+            <li><strong>Tools (MCP)：</strong>auction simulator, keyword suggestion API, performance analytics, campaign management API</li>
+            <li><strong>Agent Architecture：</strong>ReACT for single-step, ToT for complex multi-step planning, planner-executor pattern</li>
+            <li><strong>Memory：</strong>Advertiser history, campaign context, conversation turns, semantic memory for best practices</li>
+            <li><strong>Evaluation：</strong>Task completion rate, recommendation acceptance rate, downstream campaign performance, safety metrics</li>
+            <li><strong>Safety：</strong>Hallucination guardrails, action confirmation for irreversible operations, human-in-the-loop for high-impact changes</li>
+            <li><strong>Scale：</strong>1.6M advertisers → multi-tenant serving, async workflows for non-real-time guidance</li>
+          </ul>
+        </div>
+        <div class="hook">你的加分点：主动提"I'd integrate MCP for tool standardization, because it lets us add new tools without retraining"</div>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="story-head s2">DPO / Fine-tuning 原理问题</div>
+      <div class="story-body">
+        <p><strong>典型问：</strong>"How would you collect preference data and apply DPO to improve advertiser guidance quality?"</p>
+        <div class="nums">
+          <ul>
+            <li><strong>Data collection：</strong>Implicit signals (advertiser applies/ignores recommendation), explicit feedback (thumbs up/down), expert annotation</li>
+            <li><strong>Preference pair construction：</strong>(prompt, chosen_response, rejected_response) — be careful about bias in annotation</li>
+            <li><strong>DPO training：</strong>Start from SFT checkpoint, apply DPO loss with β ~ 0.1–0.5, monitor KL divergence drift</li>
+            <li><strong>Eval：</strong>Held-out preference accuracy, production A/B on recommendation acceptance rate</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="story-head s3">Coding（LeetCode medium 级别）</div>
+      <div class="story-body">
+        <p>Amazon AS bar：medium，写之前说思路，写完说 complexity。重点是 <strong>clarity over cleverness</strong>。</p>
+        <div class="nums">
+          <strong>可能考的题型：</strong>
+          <ul>
+            <li>String parsing（解析 advertiser intent / tool call output）</li>
+            <li>Graph BFS/DFS（agent 状态图遍历）</li>
+            <li>Dynamic programming（广告预算分配）</li>
+            <li>Sliding window（时间序列广告指标）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑩ 要问的问题 -->
+<div class="card">
+  <div class="ch teal">⑩ 你应该问面试官的问题</div>
+  <div class="cb">
+    <ul style="padding-left:18px; font-size:0.9em;">
+      <li style="margin-bottom:8px">"The JD mentions both conversational and non-conversational experiences — how does the team currently think about the boundary between those? Is there a unified agent or separate systems?"</li>
+      <li style="margin-bottom:8px">"For preference optimization, where does your training signal come from today — human annotation, implicit advertiser behavior, or something else?"</li>
+      <li style="margin-bottom:8px">"How do you evaluate whether an agent recommendation actually helped an advertiser — is it purely downstream campaign metrics, or do you have shorter-loop proxies?"</li>
+      <li style="margin-bottom:8px">"You mentioned working with auction simulations as a tool — is that an existing internal tool or something the team is building?"</li>
+    </ul>
+    <div class="verdict warn" style="margin-top:12px;">
+      <strong>⚠️ 不要问</strong>"你们用什么 LLM？" 或 "你们在用 GPT-4 还是 Claude？" — 这类问题暗示你只会 prompt，不做底层科学。
+    </div>
+  </div>
+</div>
+
+<!-- ⑪ 简历 45%→更高 -->
+<div class="card">
+  <div class="ch purple">⑪ Resume Match 45% → 提升策略</div>
+  <div class="cb">
+    <p style="margin-bottom:14px; font-size:0.9em;">你目前匹配了 5/11 关键词。以下是最可能缺失的高权重词，加到简历里可以提升：</p>
+    <div class="pills">
+      <span class="pill p-gap">DPO / preference optimization</span>
+      <span class="pill p-gap">instruction tuning</span>
+      <span class="pill p-gap">agentic architecture</span>
+      <span class="pill p-gap">evaluation pipeline</span>
+      <span class="pill p-gap">safety guardrails</span>
+      <span class="pill p-gap">MCP</span>
+    </div>
+    <div class="verdict warn" style="margin-top: 14px;">
+      <strong>快速修复（不用改经历，只改描述措辞）</strong><br>
+      Capital One 黑客马拉松 bullet → 加 "MCP" 和 "multi-agent orchestration" 明确关键词<br>
+      Capital One chatbot bullet → 加 "instruction tuning" 和 "agentic architecture (ReACT)"<br>
+      Capital One eval infra bullet → 加 "evaluation pipeline" 和 "safety guardrails"<br>
+      Capital One GenAI bullet → 加 "preference-driven" 或 "alignment"（如果能合理嵌入）
+    </div>
+    <p style="margin-top: 12px; font-size: 0.88em; color: #555;">需要我帮你生成针对 3188931 的定制简历吗？按照上面的关键词调整后，match 率应该能到 8–9/11。</p>
+  </div>
+</div>
+
+<!-- ⑫ DPO / PPO 知识速查 -->
+<div class="card">
+  <div class="ch navy">⑫ 知识速查 A — DPO &amp; PPO 从头回忆（你做过但忘了）</div>
+  <div class="cb">
+
+    <!-- 大图：三阶段对比 -->
+    <p style="font-size:0.88em; color:#555; margin-bottom:14px;">先记住一张图：RLHF 的三个阶段，PPO 在第三段，DPO 把三段压成一段。</p>
+
+    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:0; border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:20px; font-size:0.85em;">
+      <div style="padding:14px 16px; background:#e8eaf6; border-right:1px solid var(--border);">
+        <div style="font-weight:700; color:#3949ab; margin-bottom:8px;">① SFT（监督微调）</div>
+        <ul style="padding-left:14px;">
+          <li>用人工标注的"好回答"示范数据</li>
+          <li>让模型学会"像人一样回答"</li>
+          <li>结果：会说话，但不一定说对话</li>
+        </ul>
+        <div style="margin-top:8px; font-size:0.82em; color:#666;">数据：(prompt, good_response) pairs</div>
+      </div>
+      <div style="padding:14px 16px; background:#e0f2f1; border-right:1px solid var(--border);">
+        <div style="font-weight:700; color:#00695c; margin-bottom:8px;">② Reward Model 训练</div>
+        <ul style="padding-left:14px;">
+          <li>人类比较两个回答，选好的那个</li>
+          <li>训练一个打分模型 R(x, y)</li>
+          <li>结果：知道什么叫"好"</li>
+        </ul>
+        <div style="margin-top:8px; font-size:0.82em; color:#666;">数据：(prompt, y_win, y_lose) pairs</div>
+      </div>
+      <div style="padding:14px 16px; background:#fff8e1;">
+        <div style="font-weight:700; color:#e65100; margin-bottom:8px;">③ PPO（强化学习优化）</div>
+        <ul style="padding-left:14px;">
+          <li>用 RM 分数作为 reward</li>
+          <li>PPO 更新 policy，让分数更高</li>
+          <li>KL 惩罚防止跑偏太远</li>
+        </ul>
+        <div style="margin-top:8px; font-size:0.82em; color:#666;">同时跑：actor, critic, RM, reference 四个模型</div>
+      </div>
+    </div>
+
+    <!-- PPO 细节 -->
+    <div class="story">
+      <div class="story-head s2">PPO 核心机制</div>
+      <div class="story-body">
+        <p><strong>为什么叫 Proximal？</strong> — 每次更新不能走太远。Loss 里有个 clip：</p>
+        <div style="background:#1a1a2e; color:#e0e0e0; padding:12px 16px; border-radius:6px; font-family:monospace; font-size:0.85em; margin:8px 0;">
+          L = min( r_t · A_t, &nbsp; clip(r_t, 1-ε, 1+ε) · A_t )<br>
+          <span style="color:#80cbc4;">r_t = π_θ(a|s) / π_old(a|s) &nbsp;— ratio 新旧 policy</span><br>
+          <span style="color:#ffcc80;">A_t = advantage = R - V(s) &nbsp;— 比预期好多少</span>
+        </div>
+        <div class="nums" style="margin-top:10px;">
+          <strong>实际训练时的问题：</strong>
+          <ul>
+            <li>要同时维护 4 个模型（actor, critic, reward, reference）→ 显存爆炸</li>
+            <li>Reward hacking：模型学会"骗"reward model，说流畅废话</li>
+            <li>训练不稳定，KL 系数敏感</li>
+            <li>需要大量 rollout 样本 → 慢</li>
+          </ul>
+        </div>
+        <p style="margin-top:8px; font-size:0.88em;"><strong>面试一句话：</strong> "PPO 是 on-policy RL，训练稳定但代价高，4 个模型同时驻留 GPU，数据效率低。"</p>
+      </div>
+    </div>
+
+    <!-- DPO 细节 -->
+    <div class="story">
+      <div class="story-head s1">DPO 核心机制（最重要，背这个）</div>
+      <div class="story-body">
+        <p><strong>DPO 的关键 insight：</strong> 最优 policy 和 reward model 之间有个解析关系，可以把 reward model 消掉，直接从 preference 数据优化 policy。</p>
+        <div style="background:#1a1a2e; color:#e0e0e0; padding:12px 16px; border-radius:6px; font-family:monospace; font-size:0.84em; margin:8px 0; line-height:1.8;">
+          L_DPO = -log σ ( β · log <span style="color:#80cbc4;">π_θ(y_w|x)/π_ref(y_w|x)</span> &nbsp;−&nbsp; β · log <span style="color:#f48fb1;">π_θ(y_l|x)/π_ref(y_l|x)</span> )<br><br>
+          <span style="color:#ffcc80;">y_w = chosen (好的回答) &nbsp;|&nbsp; y_l = rejected (差的回答)</span><br>
+          <span style="color:#80cbc4;">第一项：让好回答相对 reference 概率↑</span><br>
+          <span style="color:#f48fb1;">第二项：让差回答相对 reference 概率↓</span>
+        </div>
+        <div class="nums" style="margin-top:10px;">
+          <strong>β 的含义（面试必问）：</strong>
+          <ul>
+            <li>β 大 → 越紧贴 reference model，更保守（不容易出奇怪输出）</li>
+            <li>β 小 → 偏离 reference 越远，更灵活但风险大</li>
+            <li>典型值：β = 0.1 ~ 0.5</li>
+          </ul>
+          <strong style="margin-top:8px; display:block;">DPO vs PPO 优缺点对比：</strong>
+          <ul>
+            <li>✅ DPO：只需 2 个模型（policy + reference），训练稳定，数据效率高</li>
+            <li>✅ DPO：离线训练，不需要 rollout</li>
+            <li>❌ DPO：对 preference 数据质量极度敏感（噪声 pair 会严重伤害性能）</li>
+            <li>❌ DPO：无法做 online exploration，学不到数据之外的行为</li>
+            <li>❌ PPO：计算贵，但理论上能做 online RL，探索能力更强</li>
+          </ul>
+        </div>
+        <p style="margin-top:8px; font-size:0.88em;"><strong>面试一句话：</strong> "DPO 把三步变一步，用对比 loss 直接优化 policy，简单稳定，但 preference 数据质量是瓶颈。"</p>
+      </div>
+    </div>
+
+    <!-- 变体速查 -->
+    <div class="story">
+      <div class="story-head s3">DPO 变体速查（认识就行，不用背细节）</div>
+      <div class="story-body">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:10px; font-size:0.85em;">
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">IPO</div>
+            <div style="color:#555; margin-top:4px;">修复 DPO 的理论缺陷（DPO 在 preference 完全分离时退化）。Loss 加了 正则项。Amazon JD 点名了 IPO。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">SimPO</div>
+            <div style="color:#555; margin-top:4px;">不需要 reference model，用序列平均 log prob 代替 ratio。更简单，省显存。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">ORPO</div>
+            <div style="color:#555; margin-top:4px;">把 SFT loss 和 preference loss 合并成一步，连 reference model 也不需要。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">GRPO（DeepSeek 用的）</div>
+            <div style="color:#555; margin-top:4px;">Group Relative Policy Optimization，把同一 prompt 的多个输出做组内对比，不需要独立 value function。</div>
+          </div>
+        </div>
+        <p style="margin-top:10px; font-size:0.85em; color:#555;">面试中提到 IPO（因为 JD 点名了）+ GRPO（展示你跟进最新进展）就够了。</p>
+      </div>
+    </div>
+
+    <!-- 对这个 JD 的实际用法 -->
+    <div class="story">
+      <div class="story-head s4">在 Amazon Campaign Strategies 里，DPO 实际用来做什么？</div>
+      <div class="story-body">
+        <div class="hook">
+          "For advertiser guidance, DPO would be used to tune the model's response style — not just correctness, but tone, specificity, and actionability. The preference signal comes from advertiser behavior: did they accept the recommendation, ignore it, or explicitly reject it? Over time, these implicit signals form preference pairs that can be used for offline DPO updates."
+        </div>
+        <div class="nums">
+          <strong>Preference 数据来源（广告场景）：</strong>
+          <ul>
+            <li>显式：广告主对建议"采纳 / 忽略 / 拒绝"</li>
+            <li>隐式：采纳建议后 campaign 表现是否改善（延迟 signal，但更真实）</li>
+            <li>专家标注：内部 AM（Account Manager）评分哪个建议更好</li>
+            <li>反事实：相同状态下 A/B 不同建议，比较实际结果</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑬ Tool Calling 深度 + 你的研究观点 -->
+<div class="card">
+  <div class="ch orange">⑬ 知识速查 B — Tool Calling 深度 &amp; 你的核心研究立场</div>
+  <div class="cb">
+
+    <!-- Tool Calling 机制 -->
+    <div class="story">
+      <div class="story-head s1">Tool Calling 工作原理（从底层理解）</div>
+      <div class="story-body">
+        <p style="margin-bottom:10px;">Tool calling 不是魔法，是一个精确的 structured output → execution → injection 循环：</p>
+        <div style="background:#1a1a2e; color:#e0e0e0; padding:14px 18px; border-radius:8px; font-family:monospace; font-size:0.82em; line-height:1.9;">
+          <span style="color:#80cbc4;">1. 开发者定义工具 schema（名字、参数、描述）</span><br>
+          <span style="color:#ffcc80;">2. Schema 注入 system prompt 或特殊 token 序列</span><br>
+          <span style="color:#ce93d8;">3. LLM 生成结构化 JSON：{ "tool": "get_campaign_stats", "args": {"id": 123} }</span><br>
+          <span style="color:#80cbc4;">4. 框架捕获 JSON，验证 schema，执行工具</span><br>
+          <span style="color:#ffcc80;">5. 工具结果作为 tool message 注回 context</span><br>
+          <span style="color:#ce93d8;">6. LLM 继续生成，based on 工具结果推理下一步</span>
+        </div>
+        <div class="nums" style="margin-top:12px;">
+          <strong>关键设计决策：</strong>
+          <ul>
+            <li><strong>并行 vs 串行调用：</strong>OpenAI / Anthropic 支持并行 tool call（同一轮生成多个 JSON），适合独立任务；串行适合有依赖的步骤</li>
+            <li><strong>Tool schema 质量：</strong>描述越精确，模型越不容易选错工具。这是被大量低估的工程工作。</li>
+            <li><strong>Context 管理：</strong>每次 tool result 都塞进 context，多轮后 context 快速膨胀，需要压缩/摘要策略</li>
+            <li><strong>安全边界：</strong>工具执行 side effects（改数据库、暂停活动）需要 confirmation gate 或 dry-run 模式</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- MCP 架构 -->
+    <div class="story">
+      <div class="story-head s2">MCP（Model Context Protocol）架构</div>
+      <div class="story-body">
+        <p style="margin-bottom:8px;">MCP 是 Anthropic 2024 年发布的开放标准，把 tool 的定义、发现、调用标准化成一个协议。</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:0.85em; margin:10px 0;">
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">MCP Server（工具侧）</div>
+            <ul style="padding-left:14px;">
+              <li>暴露 Tools（可调用函数）</li>
+              <li>暴露 Resources（可读数据）</li>
+              <li>暴露 Prompts（模板）</li>
+              <li>通过 list_tools() 让 client 发现</li>
+            </ul>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--teal); margin-bottom:6px;">MCP Client（Agent 侧）</div>
+            <ul style="padding-left:14px;">
+              <li>连接 server，拉取工具列表</li>
+              <li>把工具注入 LLM context</li>
+              <li>把 LLM 的 tool call 路由到正确 server</li>
+              <li>拿结果返回给 LLM</li>
+            </ul>
+          </div>
+        </div>
+        <div class="hook">"MCP 的核心价值不是让 tool call 更容易，而是让工具生态标准化——任何 MCP-compatible 工具都可以插入任何 MCP-compatible agent，不需要重新训练或重新提示。这对 Amazon 的广告工具生态（auction API, keyword API, analytics API）非常有价值。"</div>
+      </div>
+    </div>
+
+    <!-- Tool Call Failure 分类学（你的主要兴趣） -->
+    <div class="story">
+      <div class="story-head s3">🔥 Tool Call Failure 分类学（你的核心研究兴趣，面试加分）</div>
+      <div class="story-body">
+        <p style="margin-bottom:12px;">这是目前 agent reliability 领域最活跃的研究方向。把 failure 分成两大类，七种模式：</p>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-weight:700; color:var(--red); margin-bottom:8px; border-left:3px solid var(--red); padding-left:8px;">一、模型侧 Failure（模型的锅）</div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:8px; font-size:0.84em;">
+            <div style="background:#fce4ec; border-radius:6px; padding:10px 14px;">
+              <div style="font-weight:700; color:#c62828;">① Wrong Tool Selection</div>
+              <div style="margin-top:4px; color:#555;">任务需要 A，模型选了 B。通常因为 tool description 写得不够清晰，或模型没理解意图。</div>
+              <div style="margin-top:6px; font-size:0.82em; color:#888;">📍 广告场景：用 "get_keywords" 代替 "get_search_terms"</div>
+            </div>
+            <div style="background:#fce4ec; border-radius:6px; padding:10px 14px;">
+              <div style="font-weight:700; color:#c62828;">② Bad Parameter Generation</div>
+              <div style="margin-top:4px; color:#555;">工具选对了，但参数错了——类型不符、缺少必填字段、超出范围、注入式字符串。</div>
+              <div style="margin-top:6px; font-size:0.82em; color:#888;">📍 广告场景：bid 参数传了负值或字符串</div>
+            </div>
+            <div style="background:#fce4ec; border-radius:6px; padding:10px 14px;">
+              <div style="font-weight:700; color:#c62828;">③ Hallucinated Tool Call</div>
+              <div style="margin-top:4px; color:#555;">调用了不存在的工具，或使用了不存在的参数字段。</div>
+              <div style="margin-top:6px; font-size:0.82em; color:#888;">📍 比例随 tool 数量增加显著上升</div>
+            </div>
+            <div style="background:#fce4ec; border-radius:6px; padding:10px 14px;">
+              <div style="font-weight:700; color:#c62828;">④ Loop / Over-calling</div>
+              <div style="margin-top:4px; color:#555;">工具失败后不断重试，或在不需要工具的时候也调用。缺乏 "don't call if uncertain" 机制。</div>
+              <div style="margin-top:6px; font-size:0.82em; color:#888;">📍 生产环境：引发 API 限速或账单问题</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-weight:700; color:#e65100; margin-bottom:8px; border-left:3px solid #e65100; padding-left:8px;">二、系统侧 Failure（环境的锅）</div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:8px; font-size:0.84em;">
+            <div style="background:#fff3e0; border-radius:6px; padding:10px 14px;">
+              <div style="font-weight:700; color:#e65100;">⑤ Execution Failure</div>
+              <div style="margin-top:4px; color:#555;">工具本身报错：网络超时、rate limit、下游服务不可用、权限不足。</div>
+              <div style="margin-top:6px; font-size:0.82em; color:#888;">📍 模型必须能区分"我的调用错了"vs"系统坏了"</div>
+            </div>
+            <div style="background:#fff3e0; border-radius:6px; padding:10px 14px;">
+              <div style="font-weight:700; color:#e65100;">⑥ Stale / Inconsistent Results</div>
+              <div style="margin-top:4px; color:#555;">工具返回了过期数据或中间状态数据，模型基于错误信息做决策。</div>
+              <div style="margin-top:6px; font-size:0.82em; color:#888;">📍 广告场景：竞拍价格数据 lag 导致错误出价建议</div>
+            </div>
+            <div style="background:#fff3e0; border-radius:6px; padding:10px 14px;">
+              <div style="font-weight:700; color:#e65100;">⑦ State Drift in Multi-step</div>
+              <div style="margin-top:4px; color:#555;">多步执行中，step N 的 side effect 让 step N+2 的假设失效。Agent 对世界状态的 mental model 和实际状态不同步。</div>
+              <div style="margin-top:6px; font-size:0.82em; color:#888;">📍 最难处理的 failure，需要 state tracking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Failure 处理机制 -->
+    <div class="story">
+      <div class="story-head s4">Failure 处理机制 — 研究前沿</div>
+      <div class="story-body">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:0.85em;">
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">✅ 现在工业界在用的（成熟）</div>
+            <ul style="padding-left:14px;">
+              <li style="margin-bottom:4px;"><strong>Schema validation before execution</strong> — 在 LLM 调用工具之前，用 JSON Schema 验证参数合法性，非法就打回让模型重生成</li>
+              <li style="margin-bottom:4px;"><strong>Retry with error injection</strong> — 把错误信息注回 context，让模型看到具体报错信息再重试</li>
+              <li style="margin-bottom:4px;"><strong>Max retry + fallback</strong> — 超过 N 次失败后降级：用更简单工具 / 不用工具直接回答 / 转人工</li>
+              <li style="margin-bottom:4px;"><strong>Confirmation gate for irreversible actions</strong> — 改数据、删内容类的操作先 dry-run 或要求用户确认</li>
+            </ul>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--teal); margin-bottom:6px;">🔬 研究前沿（面试加分）</div>
+            <ul style="padding-left:14px;">
+              <li style="margin-bottom:4px;"><strong>Reflexion-style self-correction</strong> — agent 看到失败后生成"为什么失败"的 verbal reflection，指导下次重试（你做过！）</li>
+              <li style="margin-bottom:4px;"><strong>Tool retrieval / RAG for tools</strong> — 工具太多时，先检索最相关的 K 个工具再注入 context，减少选错概率（CRAFT 论文）</li>
+              <li style="margin-bottom:4px;"><strong>Uncertainty-aware calling</strong> — 在生成 tool call 前估计 confidence，低于阈值时改为 "ask for clarification" 而不是盲目调用</li>
+              <li style="margin-bottom:4px;"><strong>State snapshot + rollback</strong> — 记录每步执行前的系统状态，失败时 rollback（类似数据库事务）</li>
+              <li style="margin-bottom:4px;"><strong>Multi-agent supervision</strong> — 用监督 agent 专门检查 worker agent 的 tool call 是否合理，拦截异常</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 你的研究立场 — 面试版 -->
+    <div class="story">
+      <div class="story-head s5">🎯 你的研究立场 — 如何在面试里讲"tool reliability &gt; DPO/PPO"而不被 challenge</div>
+      <div class="story-body">
+        <div class="verdict bad" style="margin-bottom:12px;">
+          <strong>❌ 危险版本（不能这么说）</strong>
+          "I think DPO and PPO are kind of overrated. Modern LLMs are already strong enough — the real work is in system design and tool use."<br>
+          <em style="font-size:0.88em;">→ 面试官会说：那你为什么来应聘一个明确要求 DPO/IPO 的岗位？</em>
+        </div>
+        <div class="verdict good" style="margin-bottom:12px;">
+          <strong>✅ 正确版本（有据可依的科学立场）</strong>
+        </div>
+        <div class="hook" style="font-size:0.93em; line-height:1.75;">
+          "I think we're at an interesting inflection point. Base model capabilities — reasoning, instruction following, code generation — have improved dramatically through pre-training and alignment techniques like DPO. We're seeing diminishing marginal returns from optimizing those algorithms further, at least at the model-behavior level.<br><br>
+
+          What I find more tractable and higher-ROI right now is reliability engineering for agentic systems — specifically, how agents handle tool failures, maintain consistent world-state across multi-step execution, and recover gracefully when the environment behaves unexpectedly. For a system guiding 1.6 million advertisers, a tool failure that silently corrupts campaign state is a much more dangerous failure mode than a model that sounds slightly less helpful.<br><br>
+
+          That said, DPO and preference optimization are absolutely still important — they're what make the model's tool-use decisions trustworthy in the first place. A model that hallucinates tool calls or ignores tool output isn't fixable with retry logic. So I see training and reliability engineering as complementary layers: training ensures the model reasons correctly, reliability engineering ensures the system behaves correctly even when the model is uncertain or the environment fails."
+        </div>
+
+        <div class="nums" style="margin-top:12px;">
+          <strong>这个回答为什么赢：</strong>
+          <ul>
+            <li>没有否定 DPO/PPO，而是说"投入产出比在转移"——这是可以辩护的科学判断</li>
+            <li>用"1.6M advertisers"把 Amazon 的具体场景带进来，说明你是在为这个 team 思考</li>
+            <li>"Tool failure that silently corrupts campaign state"——这是一个非常具体、高风险的 failure mode，面试官会认同</li>
+            <li>最后用"complementary layers"收尾，避免"我不想做训练"的印象</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:14px; background:#e8f4fd; border-left:4px solid var(--blue); padding:12px 16px; border-radius:0 6px 6px 0;">
+          <strong style="color:var(--blue); font-size:0.88em;">追问准备："那你觉得 tool reliability 里最值得研究的方向是什么？"</strong>
+          <div style="margin-top:8px; font-size:0.88em; color:#1a3a5c; line-height:1.6;">
+            "I'm most interested in state consistency in multi-step agent workflows. The hard problem isn't a single tool failure — it's when step 3 succeeds but changes the environment in a way that makes step 5's assumptions invalid, and the agent doesn't detect the drift. This is the agentic equivalent of a transaction isolation problem in databases. Current approaches like Reflexion are good at single-step error correction, but there's no good framework yet for tracking and validating world-state across an entire execution plan."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 相关论文速查 -->
+    <div class="story">
+      <div class="story-head s2">相关论文速查（认识就够，不用背细节）</div>
+      <div class="story-body">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:8px; font-size:0.84em;">
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">Reflexion (Shinn et al. 2023)</div>
+            <div style="color:#555; margin-top:3px;">Agent 失败后写 verbal self-reflection，存入 episodic memory，下次重试时参考。你在 Capital One 做的是这个的 production 版。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">ToolBench / ToolLLM (2023)</div>
+            <div style="color:#555; margin-top:3px;">构建了 16K+ 真实 API 的 tool use 数据集，测试 LLM 在 real-world tool failure 下的表现。结论：大模型 tool use 在 API 错误时表现糟糕。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">CRAFT (2024)</div>
+            <div style="color:#555; margin-top:3px;">Tool Retrieval via RAG：从工具库里检索最相关的 K 个工具注入 context，解决"工具太多导致选错"的问题。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">AgentBench (2023)</div>
+            <div style="color:#555; margin-top:3px;">系统性评估 agent 在 8 类环境（OS、database、web、game...）下的表现。发现 tool failure recovery 是最大短板。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">DPO (Rafailov et al. 2023)</div>
+            <div style="color:#555; margin-top:3px;">原始论文。必须能解释核心 loss 公式和 β 的作用。其余细节面试不会深问。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px;">
+            <div style="font-weight:700; color:var(--blue);">GRPO / DeepSeek-R1 (2025)</div>
+            <div style="color:#555; margin-top:3px;">Group Relative Policy Optimization，用于 reasoning model 训练。提一句"我关注了 DeepSeek 的 GRPO 方法"展示你跟进最新进展。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer style="text-align:center; color:#999; font-size:0.78em; padding:30px 0;">
+  Generated April 2026 · Amazon AS-II Campaign Strategies · Job ID 3188931 · Tian Feng interview prep
+</footer>
+</div>
+</body>
+</html>
