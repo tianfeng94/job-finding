@@ -431,38 +431,46 @@ I designed 12 feature variants to test different standardization approaches. Var
 
     <!-- STORY D -->
     <div class="story">
-      <div class="story-head sd">⭐ Story D：Strategy 7 生产事故 — Ownership故事【Dive Deep · Ownership · Insist on Highest Standards · Have Backbone】</div>
+      <div class="story-head sd">⭐ Story D：ROAS 项目遗漏 → 三个月后事故 — 【Biggest Mistake · Dive Deep · Ownership】</div>
       <div class="story-body">
         <div class="tag-row">
-          <span class="tag hit">Dive Deep</span><span class="tag hit">Ownership</span><span class="tag hit">Insist on Highest Standards</span><span class="tag warn">Have Backbone</span>
+          <span class="tag hit">Biggest Failure / Mistake</span><span class="tag hit">Dive Deep</span><span class="tag hit">Ownership</span><span class="tag hit">Insist on Highest Standards</span>
         </div>
-        <div class="starr-label">S</div>
-        <div class="starr-s">"This was a production incident at Rokt. A campaign switched bidding strategies from CPA to ROAS, but the configuration update was incomplete — only one of the two required fields was updated. The pricing system entered an inconsistent state we call 'Strategy 7,' where the system was configured for ROAS but still using CPA-mode quality scoring. Nobody caught it during the update."</div>
+        <p style="font-size:0.84em; color:#555; margin-bottom:10px;">用于"Tell me about your biggest mistake / a time you failed"。这是你唯一一个真实的生产事故故事，有量化数字，有 genuine mistake，有 systemic fix。比 MVP 演示失败的 impact 大得多，更适合 Amazon 的 data-driven 文化。</p>
 
-        <div class="starr-label">T</div>
-        <div class="starr-t">"I needed to diagnose the revenue impact, find the exact root cause, and ensure this class of failure couldn't happen again."</div>
+        <div class="starr-label">S — 背景：入职初期的研究任务</div>
+        <div class="starr-s">"My first major project at Rokt was investigating why our ROAS bidding strategy wasn't scaling auctions. I did the analysis — I went deep on the model side: feature engineering, CVR calibration, loss function design. I believed I understood the system well enough."</div>
+
+        <div class="starr-label">Mistake — 这是关键，主动说是自己的遗漏</div>
+        <div class="starr-t" style="border-left-color: var(--red); background: #fce4ec;">"What I didn't do was audit the campaign lifecycle — specifically, how campaigns onboard to a strategy and how bidding strategy switches are handled at the system level. I treated that as infrastructure, not my problem. That was my gap."</div>
+
+        <div class="starr-label">T — 三个月后：事故发生</div>
+        <div class="starr-t">"Months later, one of the campaigns I had previously analyzed went completely dark — out of nowhere."</div>
 
         <div class="starr-label">A</div>
-        <div class="starr-a">"I started with impact quantification — quality score went from 0.017 to 0.0006, a 97% collapse. Win rate dropped to zero across 12.3 million auctions. Daily revenue was down 62%. This was not a small incident.
+        <div class="starr-a">"The impact was immediate and severe: quality score collapsed from 0.017 to 0.0006 — a 97% drop. Win rate hit zero across 12.3 million auctions. Daily revenue was down 62%. This wasn't noise.
 <br><br>
-I traced the root cause through auction logs in Trino, cross-referencing timestamps across the bidding engine, pricing service, and relevancy scoring systems. I identified the exact field mismatch: 'relevancy_target_roas' had been updated but the 'bidStrategy' enum field had not, creating a contradictory config state that no existing validation layer caught.
+I took ownership of the investigation. I traced it through auction logs in Trino, cross-referencing timestamps across the bidding engine, pricing service, and relevancy scoring systems. The root cause: the campaign had exited its old bidding strategy but hadn't successfully onboarded to the new one — it was stuck in a transition state with no valid strategy. The system had no guard against this inconsistent state. This was exactly the part of the system I hadn't audited.
 <br><br>
-Immediate fix was to restore the config to a consistent state. But then I pushed back on stopping there. There was pressure to document the incident and move on — this was a busy period. I argued that this incident revealed a systemic design flaw: our config system allowed invalid states that should be impossible by construction. I proposed and built a validation layer that cross-checks dependent fields before committing any bidding strategy update, making Strategy 7 and similar inconsistent states impossible to enter."</div>
+I restored the campaign to a consistent state to stop the bleeding. Then I pushed for something systemic: a validation layer that cross-checks state consistency before any bidding strategy switch is committed — making this class of inconsistent state architecturally impossible, not just monitored after the fact."</div>
 
         <div class="starr-label">R</div>
-        <div class="starr-r">"Root cause documented. Validation layer accepted and implemented. No recurrence of this class of incident since. The 12.3M auction impact was contained to a single campaign over a short window."</div>
+        <div class="starr-r">"Campaign restored. Revenue recovered within 48 hours. Validation layer proposed, accepted, and implemented. No recurrence of this class of incident since."</div>
 
-        <div class="starr-label">Reflection</div>
-        <div class="starr-ref">"Production failures are architectural feedback. A hotfix addresses symptoms; a good engineer uses the failure to identify what invariant the system should have enforced. The cost of the deeper fix is always less than the cost of the next incident."</div>
+        <div class="starr-label">Reflection — 这是 Amazon 最想听的部分</div>
+        <div class="starr-ref">"The mistake wasn't that I didn't know about campaign lifecycle management. The mistake was that I defined my own scope. When you investigate a production ML system, the failure that bites you is almost always at the seam between components — not inside the component you're focused on. Now whenever I research a system, I explicitly map the failure modes at system boundaries, even if those boundaries aren't my assigned area."</div>
 
         <div class="nums" style="margin-top:12px;">
           <strong>数字备查：</strong>
           <ul>
-            <li>Quality score: 0.017 → 0.0006 (97% drop)</li>
+            <li>Quality score: 0.017 → 0.0006（97% drop）</li>
             <li>Win rate: 0% across 12.3M auctions</li>
             <li>Daily revenue: −62%</li>
-            <li>Root cause: relevancy_target_roas / bidStrategy field mismatch</li>
+            <li>Campaign dark for ~48 hours</li>
+            <li>Root cause: inconsistent bidding strategy transition state, no system guard</li>
           </ul>
+          <strong style="margin-top:8px; display:block;">追问："你当时为什么没有审计 lifecycle 部分？"</strong>
+          <div style="font-style:italic; color:#555; font-size:0.88em; margin-top:4px;">"Honestly, it was a scoping assumption I made implicitly. My instruction was to look at model performance — why isn't ROAS scaling auctions. I assumed the infrastructure around it was someone else's domain. That assumption was wrong, and I own that."</div>
         </div>
       </div>
     </div>
@@ -587,7 +595,7 @@ The explanation was a correlation artifact in our specific data slice — but mo
         <tr>
           <td><span class="lp-name-cell">📏 Insist on Highest Standards</span></td>
           <td><span class="primary-story">Story A（GenAI — 拒绝带15%幻觉的系统上线，推迟3周建eval基础设施）</span></td>
-          <td><span class="backup-story">Story D（Strategy 7 — 推 systemic fix 不止 hotfix）</span></td>
+          <td><span class="backup-story">Story D（ROAS事故 — 推 systemic validation layer，不止 hotfix）</span></td>
           <td style="font-size:0.82em; color:#555;">"One hallucination in a regulatory context sets back AI adoption by a year."</td>
         </tr>
         <tr>
@@ -1066,15 +1074,139 @@ The explanation was a correlation artifact in our specific data slice — but mo
       3. 说明快速上手："I've read the DPO and IPO papers, I know the TRL implementation, and I have a specific plan to run a small experiment in the next week. Given my SFT experience, the ramp-up will be fast."
     </div>
 
-    <div class="section-h3" style="margin-top:16px;">你要问面试官的问题</div>
-    <ul style="padding-left:18px; font-size:0.89em;">
-      <li style="margin-bottom:7px;">"The JD mentions both conversational and non-conversational advertiser experiences — does the team currently have separate systems for each, or a unified agent?"</li>
-      <li style="margin-bottom:7px;">"For preference optimization, where does your primary training signal come from — human annotation, implicit advertiser behavior, or something else?"</li>
-      <li style="margin-bottom:7px;">"How does the team think about the safety boundary for autonomous actions? For example, can the agent directly modify campaign bids, or is it always advisory?"</li>
-      <li style="margin-bottom:7px;">"What's the biggest technical challenge the team is facing right now that I'd be expected to work on in the first 6 months?"</li>
-    </ul>
-    <div class="verdict warn" style="margin-top:10px; font-size:0.88em;">
-      <strong>⚠️ 不要问：</strong>"你们用 GPT 还是 Claude？" 或 "你们的 infra 是什么？" — 暗示你只是个用户，不是科学家。
+    <div class="section-h3" style="margin-top:16px;">你要问面试官的问题 — 双重目的：展示你 + 打听实情</div>
+
+    <div class="verdict info" style="margin-bottom:14px; font-size:0.88em;">
+      <strong>提问的两个目的：</strong>① 让面试官觉得你认真、有深度 ② 真正判断这个组是不是值得去。问题要设计成"听答案就能判断组的货色"。好的组和差的组，对同一个问题的回答截然不同。
+    </div>
+
+    <!-- Category 1 -->
+    <div class="story">
+      <div class="story-head sa">第一类：技术方向 — 判断这个组是不是真的做 science</div>
+      <div class="story-body">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size:0.87em;">
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"The JD mentions agentic architectures and preference optimization — is the team currently building these from scratch, or primarily adapting existing frameworks like LangGraph or LlamaIndex?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>如果答案是"我们主要用已有框架 prompt 一下"→ 这不是科学岗，是工程岗。如果他们有自己的 training pipeline 和 eval 框架 → 真的在做 science。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"How does the team balance long-horizon research — like training new models — against shipping features for the ad console? What's the rough time allocation?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>如果 90% 时间是功能交付 → scientist 实际上是 PM+工程师。如果有明确的 research cycle → 组里有科学文化。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"When you run an A/B test on agent recommendations and it doesn't show lift — what typically happens? Do you kill it, iterate, or publish the negative result?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>好组会说"we try to understand why"或"we sometimes share negative results internally"。差组会说"we move on quickly" → 没有学习文化，只追交付。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"For preference optimization — DPO or similar — where does the team's training signal come from today? Is it human annotation, implicit advertiser behavior, or something else?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>如果他们还没有答案 → 说明 DPO 在 JD 里是 aspirational 不是 real。如果有清晰的数据 pipeline → 他们是认真的。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 2 -->
+    <div class="story">
+      <div class="story-head sb">第二类：团队结构 — 判断 scientist 的实际话语权</div>
+      <div class="story-body">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size:0.87em;">
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"What's the ratio of applied scientists to software engineers on the Campaign Strategies team? And how does technical direction typically get set — scientist-led or PM-led?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>Scientist 人少且 PM 主导方向 → 你基本是 feature factory。Scientist 主导技术路线 → 你有真正的科学空间。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"How long has the current team been together? Has there been significant turnover in the past year?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>高流动率 → 可能有管理问题或方向频繁变化。稳定团队 → 人们愿意留下来，说明组的文化和方向是可信的。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"What does the onboarding process look like for a new scientist? How long until someone is expected to ship something meaningful?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>"Two weeks then you're on your own" → 高压且可能没有好的 mentorship。"We pair you with a buddy and expect 3-month ramp" → 更成熟的组织。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"Can scientists propose their own research agenda, or is the roadmap primarily set by product requirements?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>直接回答"yes you can propose" + 举出例子 → 真的。模糊的"we try to balance both" → 实际上是 PM 驱动。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 3 -->
+    <div class="story">
+      <div class="story-head sc">第三类：产品方向 — 判断你要做的东西是不是真实存在的</div>
+      <div class="story-body">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size:0.87em;">
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"The JD mentions both conversational and non-conversational advertiser experiences — do you currently have a deployed system in either mode, or is this still in research and prototyping?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>如果连 prototype 都没有 → 这个 role 可能是从零建。如果有 MVP 在生产 → 你加入一个有实际用户的系统，更有约束感也更 grounded。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"How do you currently measure whether an agent recommendation actually helped an advertiser — is it immediate acceptance rate, downstream campaign performance, or something else?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>有清晰 metric → 组在认真思考 attribution。答案模糊 → 他们还没想清楚怎么评估自己的系统，这是风险信号。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"What's the biggest thing that surprised you about this problem since you started working on it — something you didn't anticipate when you first joined?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>好的回答会说具体的技术或业务挑战（说明他们真的在思考）。模糊回答 → 他们要么没想过要么不愿意分享，两种都不好。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题（问 hiring manager 专属）</div>
+            <div>"If I join, what would you want me to accomplish in the first 90 days? And what would make you say 'this person is exactly what we needed'?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>清晰的 90-day plan → 他们有明确需求。"Just ramp up and explore" → 可能没有想清楚要你做什么，或者方向在变。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 4 -->
+    <div class="story">
+      <div class="story-head se">第四类：个人发展 — 判断这个组能不能让你成长</div>
+      <div class="story-body">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size:0.87em;">
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"Are scientists on this team encouraged to publish or present at conferences? Or is the focus primarily internal?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>有 publication 文化 → 组里有 intellectual rigor 的激励。纯内部 → 你的科学能力可能会停滞，只是在工程化别人的想法。</div>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px;">
+            <div style="font-weight:700; color:var(--blue); margin-bottom:6px;">问题</div>
+            <div>"What's the most technically interesting thing a scientist on this team has worked on in the past year?"</div>
+            <div style="margin-top:8px; font-size:0.83em; color:#555;"><strong>听什么：</strong>如果他们能马上说出一个具体的、有趣的技术项目 → 组里有真实的科学工作在发生。如果他们想半天说不出来 → 这是个信号。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Do/Don't -->
+    <div class="dd" style="margin-top:12px;">
+      <div class="do-box">
+        <h4>✅ 提问技巧</h4>
+        <ul>
+          <li>每场面试准备2–3个，不需要全问完</li>
+          <li>根据面试官的角色选不同问题——scientist 问技术，manager 问方向和成长</li>
+          <li>如果面试官在回答过程中自己触及了一个话题，顺势追问比背稿更自然</li>
+          <li>问完后说"That's really helpful, thank you" 然后简短分享你的想法 → 变成对话，不是盘问</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>❌ 不要问</h4>
+        <ul>
+          <li>"你们用 GPT-4 还是 Claude？" — 暗示你只是个用户</li>
+          <li>"Compensation 怎么样？" — 等 recruiter 阶段</li>
+          <li>"工作生活平衡怎么样？" — 太早问这个会让人觉得你更在意 comfort</li>
+          <li>"What is Amazon's culture like?" — 你应该已经知道 LP，问这个显得没做功课</li>
+          <li>问 yes/no 问题 — 问开放式的，你才能从答案里判断组的质量</li>
+        </ul>
+      </div>
     </div>
 
   </div>
